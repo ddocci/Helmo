@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: url('/backgroundimg.jpg') no-repeat center center / cover;
+  background-color: rgba(0, 0, 0, 0.5); /* 어두운 효과 */
+  background-blend-mode: darken;
+}
+
+.login-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  width: 500px;              /* ✅ 가로 크기 확장 */
+  height: 600px;             /* ✅ 세로 크기 추가 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 2rem;             /* ✅ 내부 여백 증가 */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+
+.login-header {
+  width: 100%;
+  height: 60px;
+  background-color: #1d2c3f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  flex-shrink: 0; /* ✅ 헤더 영역 줄어들지 않도록 */
+}
+
+.login-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* ✅ 수직 가운데 정렬 */
+  padding: 2rem;
+  flex-grow: 1;
+  box-sizing: border-box;
+}

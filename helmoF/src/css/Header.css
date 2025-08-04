@@ -1,0 +1,17 @@
+.login-header {
+  width: 110%;
+  height: 60px;
+  background-color: #aedaf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 20px 0px;
+  box-sizing: border-box;
+}
+
+.login-header img {
+  height: 40px;
+  object-fit: contain;
+}
