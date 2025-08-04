@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { Button } from './components/Button'
 import {Routes,Route,Link,useNavigate} from "react-router-dom"
 import Login from './pages/Login'
+
 import Workmain from './pages/Workmain'
 import Adminmain from './pages/Adminmain'
 import Edit from './pages/Edit'
 import Notfound from './pages/Notfound'
+
 // import './App.css'
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
       <Route path="/adminmain" element={<Adminmain/>}/>
       <Route path="/edit" element={<Edit/>}/>
       <Route path="/*" element={<Notfound/>}/>
+
     </Routes>
     </>
   )
