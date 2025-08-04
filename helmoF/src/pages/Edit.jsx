@@ -3,7 +3,7 @@ import React from 'react'
 const Edit = () => {
   return (
     <div>
-        수정된 에딧 페이지
+        채은아 생일 2일 지났지만 축하한다~~!!
     </div>
 
   )
