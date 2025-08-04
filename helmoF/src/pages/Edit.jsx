@@ -3,7 +3,7 @@ import React from 'react'
 const Edit = () => {
   return (
     <div>
-        Hello World!
+        File Edit
     </div>
 
   )
