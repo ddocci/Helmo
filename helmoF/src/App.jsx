@@ -18,10 +18,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Login/>}/>
       <Route path="/workmain/:id" element={<Workmain/>}/>
-      <Route path="/adminmain" element={<Adminmain/>}/>
+      <Route path="/adminmain/:id" element={<Adminmain/>}/>
       <Route path="/edit" element={<Edit/>}/>
       <Route path="/*" element={<Notfound/>}/>
-
     </Routes>
     </>
   )
