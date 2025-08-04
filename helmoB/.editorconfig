@@ -1,0 +1,7 @@
+# .editorconfig
+root = true
+
+[*]
+end_of_line = crlf   # 또는 crlf, 원하는 방식 선택
+insert_final_newline = true
+charset = utf-8
