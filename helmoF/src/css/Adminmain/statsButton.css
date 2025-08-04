@@ -1,0 +1,12 @@
+.stats-button {
+  background: #e5f1ff;
+  color: #0056b3;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.stats-button:hover {
+  background: #d0e7ff;
+}

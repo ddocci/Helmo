@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "../css/Adminmain/AdminMain.css";
+import "../css/Adminmain/AdminCalender.css";
+import "../css/Adminmain/AdminCard.css";
+import "../css/Adminmain/AdminHeader.css";
+import "../css/Adminmain/AdminInfo.css";
+import "../css/Adminmain/statsButton.css";
 
 export default function AdminMain() {
   const [selectedDate, setSelectedDate] = useState(new Date());
