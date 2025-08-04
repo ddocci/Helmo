@@ -6,7 +6,6 @@ import "../css/Adminmain/AdminCalender.css";
 import "../css/Adminmain/AdminCard.css";
 import "../css/Adminmain/AdminHeader.css";
 import "../css/Adminmain/AdminInfo.css";
-import "../css/Adminmain/statsButton.css";
 
 export default function Workmain() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -31,7 +30,6 @@ export default function Workmain() {
     <div className="admin-container">
       <header className="admin-header">
         <div className="header-left"></div>
-        <button className="stats-button">통계 보기 →</button>
       </header>
 
       <div className="info-banner">
