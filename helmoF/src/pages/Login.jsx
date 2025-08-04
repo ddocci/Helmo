@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RoleToggle from '../components/RoleToggle';
-import { Button } from '../components/Button';
 import Form from '../components/Form';
 import axios from 'axios';
-import '../css/Login.css'
-import Header from '../components/Header';
+import '../css/Login.css';
 
 const Login = () => {
   const [role, setRole] = useState('worker');
@@ -13,11 +11,11 @@ const Login = () => {
   const [pw, setPw] = useState('');
   const navigate = useNavigate();
 
-  const onClick = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/login', {
+      const response = await axios.post('http://localhost:3000/api/login', {
         id,
         password: pw,
         role,
@@ -25,35 +23,36 @@ const Login = () => {
 
       if (response.data.success) {
         const userId = response.data.userId;
-        if (role === 'admin') {
+        const roleFromServer = response.data.role;
+
+        if (roleFromServer === 'admin') {
           navigate(`/adminmain/${userId}`);
-        } else {
+        } else if (roleFromServer === 'user' || roleFromServer === 'worker') {
           navigate(`/workmain/${userId}`);
+        } else {
+          alert('알 수 없는 역할입니다.');
         }
       } else {
-        alert('로그인 실패했심더');
+        alert(response.data.message || '로그인 실패');
       }
     } catch (err) {
       console.error(err);
-      alert('서버 터졌심더...');
+      alert('서버 에러 발생');
     }
   };
 
-    return (
+  return (
     <div className="login-page">
-        <div className="login-box">
-        {/* <Header /> */}
+      <div className="login-box">
         <div className="login-content">
+          <form onSubmit={onSubmit}>
             <RoleToggle role={role} setRole={setRole} />
             <Form id={id} setId={setId} pw={pw} setPw={setPw} />
-            <div className="login-button-wrapper">
-            <Button text="SIGN IN" type="login" onClick={onClick} />
-            </div>
+          </form>
         </div>
-        </div>
+      </div>
     </div>
-    );
-
+  );
 };
 
 export default Login;

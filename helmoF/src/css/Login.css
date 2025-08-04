@@ -1,25 +1,32 @@
-
-
 .login-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: url('/backgroundimg.jpg') no-repeat center center / cover;
-  
-  width: 500px;              /* ✅ 가로 크기 확장 */
-  height: 600px;             /* ✅ 세로 크기 추가 */
+  position: relative;
+  width: 500px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  /* ✅ 반투명 흰색 배경 */
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
   overflow: hidden;
-  padding: 2rem;             /* ✅ 내부 여백 증가 */
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-}
+  padding: 2rem;
 
+  /* ❌ 기존 배경 이미지는 제거 (중복 방지) */
+  /* background: url('/backgroundimg.jpg') no-repeat center center / cover; */
+}
+.login-page {
+  height: 100vh;
+  width: 100vw;
+  background: url('/backgroundimg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .login-header {
   width: 100%;
