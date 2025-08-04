@@ -1,9 +1,12 @@
 import React from 'react'
+import '../css/Button.css'
 
-export const Button = () => {
+export const Button = ({text,type,onClick}) => {
   return (
-    <div>
-        버튼입니다.
-    </div>
+    <button onClick={onClick} className={`Button Button_${type}`}>
+      {text}
+    </button>
+        
+    
   )
 }

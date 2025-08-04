@@ -6,7 +6,8 @@ import Workmain from './pages/Workmain'
 import Adminmain from './pages/Adminmain'
 import Edit from './pages/Edit'
 import Notfound from './pages/Notfound'
-// import './App.css'
+
+import './App.css'
 
 function App() {
 
