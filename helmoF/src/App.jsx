@@ -1,14 +1,25 @@
 import { useState } from 'react'
 import { Button } from './components/Button'
+import {Routes,Route,Link,useNavigate} from "react-router-dom"
+import Login from './pages/Login'
+import Adminmain from './pages/Adminmain'
+import Workmain from './pages/Workmain'
+import Notfound from './pages/Notfound'
+import Edit from './pages/Edit'
+
 // import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      안녕하세요
-      <Button/>
+    <Routes>
+      <Route path="/" element={<Login/>}/>
+      <Route path="/adminmain" element={<Adminmain/>}/>
+      <Route path="/workmain/:id" element={<Workmain/>}/>
+      <Route path="/edit" element={<Edit/>}/>
+      <Route path='*' element={<Notfound/>}/>
+    </Routes>
     </>
   )
 }
