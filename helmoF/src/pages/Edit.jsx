@@ -3,7 +3,7 @@ import React from 'react'
 const Edit = () => {
   return (
     <div>
-        에디터입니다잉~~
+         저는 소민입니다잉~~
     </div>
 
   )
