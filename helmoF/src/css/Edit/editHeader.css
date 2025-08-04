@@ -9,8 +9,7 @@
 }
 
 /* 좌측 로고 제거 → header-left는 뒤로가기 + 텍스트만 */
-.header-left {
-  background-image: none;
+.e-header-left {
   display: flex;
   align-items: center;
 }

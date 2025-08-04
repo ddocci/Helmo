@@ -18,7 +18,7 @@ const Edit = () => {
       <div className="edit-container">
         {/* 헤더 */}
         <header className="edit-header">
-          <div className="header-left">
+          <div className="e-header-left">
             <button className="back-btn">{"<"}</button>
             <div className="header-title">
               <p>{year}년 {month}월 {day}일 통계</p>
