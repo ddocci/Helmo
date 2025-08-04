@@ -1,0 +1,23 @@
+node_modules/
+helmoF/node_modules/
+helmoB/node_modules/
+helmoF/
+# 환경 변수: 민감 정보
+.env
+helmoF/.env
+helmoB/.env
+
+# 로그파일
+*.log
+
+# 시스템 관련
+.DS_Store
+Thumbs.db
+
+# 빌드 파일 (React/Vite 경우)
+dist/
+helmoF/dist/
+
+# IDE 설정
+.vscode/
+.idea/
