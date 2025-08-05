@@ -7,6 +7,7 @@ import Workmain from './pages/Workmain'
 import Adminmain from './pages/Adminmain'
 import Edit from './pages/Edit'
 import Notfound from './pages/Notfound'
+import CalendarPage from './pages/CalendarPage'
 
 // import './App.css'
 
@@ -19,6 +20,7 @@ function App() {
       <Route path="/" element={<Login/>}/>
       <Route path="/workmain/:id" element={<Workmain/>}/>
       <Route path="/adminmain" element={<Adminmain/>}/>
+      <Route path="/calendar" element={<CalendarPage />} />
       <Route path="/edit" element={<Edit/>}/>
       <Route path="/*" element={<Notfound/>}/>
 
