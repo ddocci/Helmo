@@ -1,0 +1,38 @@
+/* 헤더 */
+.edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e0e6ef;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+}
+
+/* 좌측 로고 제거 → header-left는 뒤로가기 + 텍스트만 */
+.e-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.header-title p {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.header-title span {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* 우측 로고 */
+.header-logo img {
+  height: 4rem;
+}

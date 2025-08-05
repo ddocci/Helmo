@@ -1,0 +1,20 @@
+.Button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.Button_login {
+  background-color: #00bcd4;
+  color: white;
+  align-self: flex-end; /* 부모가 flex일 때 우측 정렬 */
+  margin-top: 1rem;
+}
+
+.Button_login:hover {
+  background-color: #00a0b3;
+}

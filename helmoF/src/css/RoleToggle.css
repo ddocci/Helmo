@@ -1,0 +1,37 @@
+.role-toggle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.signin-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f8f8f8 !important;
+  margin-bottom: 0.8rem;
+}
+
+.role-toggle {
+  display: flex;
+  gap: 2rem;
+}
+
+.role-toggle span {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ccc;
+  cursor: pointer;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.role-toggle span:hover {
+  color: #00bcd4;
+}
+
+.role-toggle .active {
+  color: #00bcd4;
+  border-bottom: 2px solid #00bcd4;
+}
