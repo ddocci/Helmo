@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../css/Retouch/retouch.css";
+
+import "../css/Retouch/retouchMain.css";
+import "../css/Retouch/retouchButton.css";
+import "../css/Retouch/retouchHeader.css";
+import "../css/Retouch/retouchSection.css";
+import "../css/Retouch/retouchTimeLine.css";
 
 const Retouch = () => {
  const [reason, setReason] = useState("");
