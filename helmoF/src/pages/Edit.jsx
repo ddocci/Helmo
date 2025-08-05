@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../css/Edit/editMain.css";
 import "../css/Edit/editHeader.css";
 import "../css/Edit/editButton.css";
 import "../css/Edit/editForm.css";
 import "../css/Edit/editTimeLine.css";
 import "../css/Edit/editRecord.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Edit = () => {
 
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
-  const day = String(today.getDate()).padStart(2, '0');
+  const { date } = useParams();
+  const choiceDate = new Date(date);
+  const year = choiceDate.getFullYear();
+  const month = String(choiceDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+  const day = String(choiceDate.getDate()).padStart(2, '0');
+  
+  const navigate = useNavigate();
+  const {currentUser} = useContext(AuthContext);
+
+  const handleBack = () => {
+    // state로 선택한 날짜 전달
+    navigate(`/adminmain/${currentUser.userId}`);
+  };
+
+  const handleRetou = () => {
+    // state로 선택한 날짜 전달
+    navigate(`/retouch/${date}`, { state: { selectedDate: date } });
+  };
+
+
+  const handleMain = () => {
+    // state로 선택한 날짜 전달
+    navigate(`/adminmain/${currentUser.userId}`);
+  };
+
+  const handleStatis = () => {
+    // state로 선택한 날짜 전달
+    navigate("/Statistics");
+  };
+
 
   return (
     <div className="page-wrapper">
@@ -19,7 +47,7 @@ const Edit = () => {
         {/* 헤더 */}
         <header className="edit-header">
           <div className="e-header-left">
-            <button className="back-btn">{"<"}</button>
+            <button className="back-btn" onClick={handleBack}>{"<"}</button>
             <div className="header-title">
               <p>{year}년 {month}월 {day}일 통계</p>
               <span>일별 기록 관리 및 추가</span>
@@ -43,7 +71,7 @@ const Edit = () => {
 
           <section className="timeline-section">
             <h3>타임별 이미지 관리</h3>
-            <button className="edit-btn">수정하기</button>
+            <button className="edit-btn" onClick={handleRetou}>수정하기</button>
             <div className="timeline-grid">
               <div className="timeline-card">
                 <p>09:00</p>
@@ -102,8 +130,8 @@ const Edit = () => {
           </section>
 
           <div className="bottom-buttons">
-            <button className="main-btn">메인화면</button>
-            <button className="stats-btn">통계</button>
+            <button className="main-btn" onClick={handleMain}>메인화면</button>
+            <button className="stats-btn" onClick={handleStatis}>통계</button>
           </div>
         </main>
       </div>

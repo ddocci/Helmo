@@ -7,9 +7,15 @@ import "../css/Adminmain/AdminCard.css";
 import "../css/Adminmain/AdminHeader.css";
 import "../css/Adminmain/AdminInfo.css";
 import "../css/Adminmain/statsButton.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function AdminMain() {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [lastClickTime, setLastClickTime] = useState(0);
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
 
   // 날짜별 점수 데이터
   const dailyData = {
@@ -27,16 +33,35 @@ export default function AdminMain() {
     weeklyAvg: "-"
   };
 
+  const handleDateClick = (date) => {
+    const now = new Date().getTime();
+    if (now - lastClickTime < 300) {
+      // 더블클릭으로 판단
+      const formattedDate = date.getFullYear() + "-" +
+      String(date.getMonth() + 1).padStart(2, "0") + "-" +
+      String(date.getDate()).padStart(2, "0");// yyyy-mm-dd 포맷
+      navigate(`/edit/${formattedDate}`); // 수정 페이지로 이동
+    }
+    setLastClickTime(now);
+    setSelectedDate(date);
+  };
+  
+  const handleStatis = () => {
+    // state로 선택한 날짜 전달
+    navigate("/Statistics");
+  };
+
   return (
     <div className="admin-container">
       <header className="admin-header">
         <div className="header-left"></div>
-        <button className="stats-button">통계 보기 →</button>
+        <button className="stats-button" onClick={handleStatis}>통계 보기 →</button>
       </header>
 
       <div className="info-banner">
         날짜를 클릭하시면 상세 정보를 확인하실 수 있습니다.
       </div>
+      
 
       <div className="calendar-container">
         <Calendar
@@ -50,6 +75,7 @@ export default function AdminMain() {
             }
             return null;
           }}
+          onClickDay={handleDateClick}
         />
       </div>
 
