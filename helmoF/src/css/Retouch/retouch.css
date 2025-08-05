@@ -1,0 +1,144 @@
+/* 전체 레이아웃 */
+.retouch-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8f9fb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+/* 헤더 */
+.retouch-header {
+  width: 1080px;
+  max-width: 95vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f1f5fa;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.retouch-date-info .retouch-subtitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.retouch-date-info .retouch-desc {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* 로고를 CSS 배경으로 처리 */
+.retouch-logo {
+  width: 140px;         /* 로고 크기 조정 */
+  height: 50px;
+  background-image: url("/logo.png");  /* 로고 경로 */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+/* 본문 컨테이너 */
+.retouch-container {
+  width: 1080px;
+  max-width: 95vw;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+/* 제목 */
+.retouch-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+/* 섹션 */
+.retouch-section {
+  margin-bottom: 2rem;
+}
+
+.retouch-section-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+/* 타임별 이미지 */
+.retouch-time-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.retouch-time-card {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.retouch-time {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.retouch-image-box {
+  border: 1px dashed #ccc;
+  padding: 1.5rem;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.retouch-placeholder {
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+}
+
+.retouch-noimage-text {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-top: 0.5rem;
+}
+
+/* 수정 사유 */
+.retouch-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: none;
+  font-size: 1rem;
+}
+
+/* 저장 버튼 */
+.retouch-button-wrapper {
+  text-align: right;
+}
+
+.retouch-save-btn {
+  background: #3f4fff;
+  color: white;
+  font-size: 1rem;
+  padding: 0.7rem 2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.retouch-save-btn:hover {
+  background: #2e3de0;
+}
