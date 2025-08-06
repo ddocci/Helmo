@@ -1,0 +1,22 @@
+/* 섹션 */
+.retouch-section {
+  margin-bottom: 2rem;
+}
+
+.retouch-section-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+/* 수정 사유 */
+.retouch-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: none;
+  font-size: 1rem;
+}
