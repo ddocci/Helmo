@@ -1,27 +1,21 @@
-import React from 'react';
-import '../css/Form.css';
+import "../css/Form.css"
 
 const Form = ({ id, setId, pw, setPw }) => {
   return (
-    <div className="form-wrapper">
+    <form className="form-wrapper">
       <input
         type="text"
-        placeholder="아이디"
+        placeholder="ID"
         value={id}
         onChange={(e) => setId(e.target.value)}
-        required
       />
       <input
         type="password"
-        placeholder="비밀번호"
+        placeholder="Password"
         value={pw}
         onChange={(e) => setPw(e.target.value)}
-        required
       />
-      <button type="submit" className="login-submit-button">
-        SIGN IN
-      </button>
-    </div>
+    </form>
   );
 };
 

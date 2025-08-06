@@ -48,7 +48,7 @@ export default function AdminMain() {
   
   const handleStatis = () => {
     // state로 선택한 날짜 전달
-    navigate("/Statistics", { state: { date: selectedDate } });
+    navigate("/Statistics");
   };
 
   return (

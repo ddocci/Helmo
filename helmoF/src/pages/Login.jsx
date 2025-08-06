@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RoleToggle from '../components/RoleToggle';
+import { Button } from '../components/Button';
 import Form from '../components/Form';
-import axios from 'axios';
-import '../css/Login.css';
+import axios from '../axios.js';
+import '../css/Login.css'
+import Header from '../components/Header';
+
+import { AuthContext } from "../contexts/AuthContext"
 
 const Login = () => {
   const [role, setRole] = useState('worker');
@@ -11,11 +15,13 @@ const Login = () => {
   const [pw, setPw] = useState('');
   const navigate = useNavigate();
 
-  const onSubmit = async (e) => {
+  const {setCurrentUser} = useContext(AuthContext);
+
+  const onClick = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/login', {
+      const response = await axios.post('http://localhost:5000/api/login', {
         id,
         password: pw,
         role,
@@ -23,36 +29,36 @@ const Login = () => {
 
       if (response.data.success) {
         const userId = response.data.userId;
-        const roleFromServer = response.data.role;
-
-        if (roleFromServer === 'admin') {
-          navigate(`/adminmain/${userId}`);
-        } else if (roleFromServer === 'user' || roleFromServer === 'worker') {
-          navigate(`/workmain/${userId}`);
+        setCurrentUser({userId: userId, role});// 로그인 상태 저장
+        if (role === 'admin') {
+          navigate(`/adminmain`);
         } else {
-          alert('알 수 없는 역할입니다.');
+          navigate(`/workmain`);
         }
       } else {
-        alert(response.data.message || '로그인 실패');
+        alert('로그인 실패했심더');
       }
     } catch (err) {
       console.error(err);
-      alert('서버 에러 발생');
+      alert('서버 터졌심더...');
     }
   };
 
-  return (
+    return (
     <div className="login-page">
-      <div className="login-box">
+        <div className="login-box">
+        {/* <Header /> */}
         <div className="login-content">
-          <form onSubmit={onSubmit}>
             <RoleToggle role={role} setRole={setRole} />
             <Form id={id} setId={setId} pw={pw} setPw={setPw} />
-          </form>
+            <div className="login-button-wrapper">
+            <Button text="SIGN IN" type="login" onClick={onClick} />
+            </div>
         </div>
-      </div>
+        </div>
     </div>
-  );
+    );
+
 };
 
 export default Login;

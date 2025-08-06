@@ -62,7 +62,7 @@ const Statistics = () => {
 
   // 페이지 이동
   const goToMain = () => navigate("/adminmain");
-  const goToEdit = () => navigate("/edit");
+  const goToEdit = () => navigate(`/edit/${passedDate}`);
 
   // PDF 저장
   const handleDownloadPDF = () => {
@@ -158,26 +158,31 @@ const lineData = {
       <div className="statistics-summary">
         <h3>이미지 기반 안전모 착용 현황 분석</h3>
         <div className="summary-controls">
-          <button
-            className={`summary-btn ${viewMode === "month" ? "active" : ""}`}
-            onClick={() => setViewMode("month")}
-          >
-            월별 보기
-          </button>
-          <button
-            className={`summary-btn ${viewMode === "year" ? "active" : ""}`}
-            onClick={() => setViewMode("year")}
-          >
-            연도별 보기
-          </button>
-        </div>
-        <div className="right-controls">
-          <button className="summary-btn nav-main" onClick={goToMain}>
+          {/* 왼쪽: 월별 / 연도별 버튼 */}
+          <div className="left-controls">
+            <button
+              className={`summary-btn ${viewMode === "month" ? "active" : ""}`}
+              onClick={() => setViewMode("month")}
+            >
+              월별 보기
+            </button>
+            <button
+              className={`summary-btn ${viewMode === "year" ? "active" : ""}`}
+              onClick={() => setViewMode("year")}
+            >
+              연도별 보기
+            </button>
+          </div>
+
+          {/* 오른쪽: 메인 / 관리 화면 버튼 */}
+          <div className="right-controls">
+            <button className="summary-btn nav-main" onClick={goToMain}>
               메인 화면
-          </button>
-          <button className="summary-btn nav-edit" onClick={goToEdit}>
+            </button>
+            <button className="summary-btn nav-edit" onClick={goToEdit}>
               관리 화면
-          </button>
+            </button>
+          </div>
         </div>
 
         {/* 네비게이션 */}

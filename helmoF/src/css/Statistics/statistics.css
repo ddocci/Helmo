@@ -158,25 +158,45 @@
 
 .summary-controls {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center; /* 버튼 세로 중앙 정렬 */
   margin: 0.5rem 0;
-  flex-wrap: wrap;
+  width: 100%;
 }
 
+.left-controls,
+.right-controls {
+  display: flex;
+  gap: 1rem;
+}
+
+/* 모든 버튼 동일 스타일 */
+.summary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;            /* 고정 높이 */
+  min-width: 110px;        /* 동일 최소 너비 */
+  padding: 0;              /* 패딩 제거 후 중앙 정렬 */
+  line-height: 44px;       /* 높이와 동일 → 세로 가운데 정렬 */
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e6eaf1;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.summary-btn.active {
+  background: #4a6ef5;
+  color: #fff;
+}
+
+/* 메인/관리 버튼 */
 .summary-btn.nav-main {
-  background: #2d9cdb; /* 파란색 */
+  background: #2d9cdb;
   color: #fff;
 }
 
-.summary-btn.nav-edit {
-  background: #27ae60; /* 초록색 */
-  color: #fff;
-}
-
-.summary-btn.nav-main:hover {
-  background: #1c82b8;
-}
-
-.summary-btn.nav-edit:hover {
-  background: #1f8f4d;
-}
+.summary-btn.nav-edi

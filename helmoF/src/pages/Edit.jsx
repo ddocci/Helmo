@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../css/Edit/editMain.css";
 import "../css/Edit/editHeader.css";
 import "../css/Edit/editButton.css";
@@ -6,6 +6,7 @@ import "../css/Edit/editForm.css";
 import "../css/Edit/editTimeLine.css";
 import "../css/Edit/editRecord.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Edit = () => {
 
@@ -16,9 +17,11 @@ const Edit = () => {
   const day = String(choiceDate.getDate()).padStart(2, '0');
   
   const navigate = useNavigate();
+  const {currentUser} = useContext(AuthContext);
+
   const handleBack = () => {
     // state로 선택한 날짜 전달
-    navigate("/adminmain/:id");
+    navigate(`/adminmain`);
   };
 
   const handleRetou = () => {
@@ -29,12 +32,12 @@ const Edit = () => {
 
   const handleMain = () => {
     // state로 선택한 날짜 전달
-    navigate("/adminmain/:id");
+    navigate(`/adminmain`);
   };
 
   const handleStatis = () => {
     // state로 선택한 날짜 전달
-    navigate("/Statistics", { state: { date: selectedDate } });
+    navigate("/Statistics");
   };
 
 
