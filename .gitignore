@@ -1,11 +1,11 @@
 node_modules/
 helmoF/node_modules/
 helmoB/node_modules/
-helmoF/
 # 환경 변수: 민감 정보
 .env
 helmoF/.env
 helmoB/.env
+helmoF/.vite
 
 # 로그파일
 *.log
