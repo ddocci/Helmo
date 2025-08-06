@@ -8,38 +8,17 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.Button_login {
-  background-color: #00bcd4;
-  color: white;
-  align-self: flex-end; /* 부모가 flex일 때 우측 정렬 */
-  margin-top: 1rem;
-}
-
-.Button_login:hover {
-  background-color: #00a0b3;
-}
-
-/* 달력용 버튼 기본 스타일 */
 .Button_calendar {
-  background-color: #4CAF50; /* 녹색 */
+  background-color: #4CAF50;
   color: white;
   margin-top: 1rem;
   margin-right: 10px;
 }
 
-/* 마우스 올렸을 때 */
-.Button_calendar:hover {
-  background-color: #388E3C;
-}
-
-/* "오늘로 이동"용 회색 버튼 */
 .Button_today {
   background-color: #9E9E9E;
   color: white;
   margin-top: 1rem;
 }
 
-.Button_today:hover {
-  background-color: #757575;
-}
 

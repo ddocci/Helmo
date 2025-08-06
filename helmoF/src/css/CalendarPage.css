@@ -1,87 +1,51 @@
-.calendar-page-container {
+/* 전체 화면 꽉 채우기 */
+.calendar-container {
+  width: 100vw;
+  height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 상단 제목 */
+.calendar-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+/* 버튼 정렬 */
+.calendar-button-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* 달력 wrapper → 달력 가운데 정렬 */
+.calendar-wrapper {
+  flex: 1;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-image: url('/bg.jpg');
-  background-size: cover;
-  background-position: center;
-  padding: 2rem;
 }
 
-.calendar-card {
-  width: 100%;
-  max-width: 800px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  border-radius: 16px;
-  padding: 2rem;
-  backdrop-filter: blur(5px);
-}
-
-.calendar-header {
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #222;
-}
-
-.calendar-body {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
+/* 실제 달력 크기 조정 */
 .react-calendar {
-  border: none;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  padding: 1rem;
-}
-
-.calendar-record {
-  flex: 1;
-  min-width: 250px;
-  background-color: #f6f8fa;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
-.calendar-record h3 {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
-.no-record {
-  font-size: 1rem;
-  color: #888;
-}
-
-.calendar-wrapper {
-  width: 100%;
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 2rem 0;
-}
-
-.react-calendar {
-  width: 90vw;             /* 전체 화면 너비의 90% */
-  max-width: 1200px;       /* 최대 너비 제한 (원하면 제거 가능) */
-  font-size: 1.2rem;
+  width: 90vw;
+  max-width: 1200px;
+  font-size: 1.5rem;
   border: none;
   border-radius: 12px;
   background-color: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  padding: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
 }
+
+
 
 
 
