@@ -31,9 +31,9 @@ const Login = () => {
         const userId = response.data.userId;
         setCurrentUser({userId: userId, role});// 로그인 상태 저장
         if (role === 'admin') {
-          navigate(`/adminmain/${userId}`);
+          navigate(`/adminmain`);
         } else {
-          navigate(`/workmain/${userId}`);
+          navigate(`/workmain`);
         }
       } else {
         alert('로그인 실패했심더');

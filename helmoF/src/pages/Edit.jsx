@@ -21,7 +21,7 @@ const Edit = () => {
 
   const handleBack = () => {
     // state로 선택한 날짜 전달
-    navigate(`/adminmain/${currentUser.userId}`);
+    navigate(`/adminmain`);
   };
 
   const handleRetou = () => {
@@ -32,7 +32,7 @@ const Edit = () => {
 
   const handleMain = () => {
     // state로 선택한 날짜 전달
-    navigate(`/adminmain/${currentUser.userId}`);
+    navigate(`/adminmain`);
   };
 
   const handleStatis = () => {

@@ -27,13 +27,13 @@ function App() {
         <Route path="/login" element={<Login/>}/>    
 
         <Route element={<Layout />}>
-          <Route path="/workmain/:userId" element={
+          <Route path="/workmain" element={
             <PrivateRoute allowedRoles={["worker"]}>
               <Workmain/>
             </PrivateRoute>
             }/>
             
-          <Route path="/adminmain/:userId" element={
+          <Route path="/adminmain" element={
             <PrivateRoute allowedRoles={["admin"]}>
               <Adminmain/>
             </PrivateRoute>

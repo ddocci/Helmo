@@ -2,7 +2,7 @@ import "../css/Form.css"
 
 const Form = ({ id, setId, pw, setPw }) => {
   return (
-    <form className="login-form">
+    <form className="form-wrapper">
       <input
         type="text"
         placeholder="ID"
