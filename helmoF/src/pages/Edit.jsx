@@ -34,7 +34,7 @@ const Edit = () => {
 
   const handleStatis = () => {
     // state로 선택한 날짜 전달
-    navigate("/Statistics");
+    navigate("/Statistics", { state: { date: selectedDate } });
   };
 
 
