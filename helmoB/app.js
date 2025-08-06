@@ -1,4 +1,8 @@
 const express = require("express");
+//Cross-Origin Resouce Sharing 교차 출처 리소스 공유
+//기본적으로 웹 브라우저는 보안상 이유로 서버가 자기출처가 아닌 곳은
+//데이터 요청을 막는다 그래서 CORS를 통해 서버와 프론트가 통신할수있게 해줌
+//
 const cors = require("cors");
 
 const cookieParser = require('cookie-parser');
@@ -13,6 +17,7 @@ app.use(cors({
   origin: 'http://localhost:5173', // React 주소
   credentials: true // 로그인 인증 토큰용 쿠키 사용 허용
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 

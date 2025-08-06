@@ -1,7 +1,7 @@
 // 토큰 검증 로직
 const jwt = require("jsonwebtoken");
 
-const authToken = (req, res, next) => {
+const authToken = (req, res, next) => { 
     const token = req.cookies.token;
 
     if (!token) {
