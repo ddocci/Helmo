@@ -1,0 +1,16 @@
+.calendar-dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f9f9f9; /* 전체 배경 */
+}
+
+.dashboard-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 20px;
+  flex: 1;
+}
+
+
