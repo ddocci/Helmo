@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const verifyToken = require("../middlewares/authToken");
-const { getDailyScore } = require("../controllers/scoreController");
+const { getDailyScore } = require("../controllers/dailyScoreController");
 
 // /api/worker/score-daily?date=0000-00-00
 // 작업자 일일 점수 조회
@@ -57,6 +57,6 @@ const { getDailyScore } = require("../controllers/scoreController");
  *       500:
  *         description: 서버 오류
  */
-router.get("/score-daily", verifyToken(), getDailyScore);
+router.get("/score-daily", verifyToken(["worker"]), getDailyScore);
 
 module.exports = router;

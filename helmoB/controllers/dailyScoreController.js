@@ -6,6 +6,7 @@ const { getConditionalStat } = require("../utils/statUtil");
 
 exports.getDailyScore = async (req, res) => {
     const userId = req.user.userId;
+    const role = req.user.role;
     const { date } = req.query;
 
     try {
@@ -14,13 +15,22 @@ exports.getDailyScore = async (req, res) => {
         let lastTime = null;
         let duration = null;
 
-        const [rows] = await db.query(
-        // time_slot: 발생 시간, deduction_reason: 감점 사유, detection_count: 감지된 객체 수, violation_count: 감지된 미착용자 수
-        `SELECT time_slot, deduction_reason, detection_count, violation_count
-        FROM score
-        WHERE user_id = ? AND score_date = ?
-        ORDER BY time_slot
-        `, [userId, date]);
+        const [rows] = role === "worker" ? 
+            await db.query( // time_slot: 발생 시간, deduction_reason: 감점 사유, detection_count: 감지된 객체 수, violation_count: 감지된 미착용자 수
+                `SELECT time_slot, deduction_reason, detection_count, violation_count
+                FROM score
+                WHERE user_id = ? AND score_date = ?
+                ORDER BY time_slot
+                `, [userId, date]) :
+            await db.query( // 관리자인 경우 관리하는 모든 현장의 내용 호출
+                `SELECT time_slot, deduction_reason, detection_count, violation_count
+                FROM score
+                WHERE score_date = ? AND user_id IN (SELECT user_id
+                                                       FROM users
+                                                      WHERE superior_id = ?)
+                ORDER BY time_slot
+                `, [date, userId]
+            );
 
         if(rows.length !== 0){
             violationTotal = getConditionalStat(rows, "violation_count", () => true, {mode: "total"});
@@ -33,10 +43,20 @@ exports.getDailyScore = async (req, res) => {
         const weekNumber = getWeekNumber(dateObj);
         const scoreYear = getScoreYear(dateObj);
 
-        const [weeklyRow] = await db.query(`
-            SELECT average_score, grade
-            FROM weekly_score
-            WHERE user_id = ? AND score_year = ? AND week_number = ?`, [userId, scoreYear, weekNumber]);
+        const [weeklyRow] = role === "worker" ? 
+            await db.query(
+                `SELECT average_score, grade
+                 FROM weekly_score
+                 WHERE user_id = ? AND score_year = ? AND week_number = ?
+                `, [userId, scoreYear, weekNumber]) : 
+            await db.query(
+                `SELECT average_score, grade
+                 FROM weekly_score
+                 WHERE score_year = ? AND week_number = ? AND user_id IN (SELECT user_id
+                                                                            FROM users
+                                                                           WHERE superior_id = ?)
+                `, [scoreYear, weekNumber, userId]
+            );
         
         if(rows.length === 0 && weeklyRow.length === 0){ // 당일 기록도 없고, 그 주의 기록도 없는 경우 (ex-다음 달 등 미래)
             return sendResponse(res, {data: null});
@@ -52,7 +72,7 @@ exports.getDailyScore = async (req, res) => {
             });
         }
     } catch (err) {
-        console.error("/worker/score-daily error", error);
+        console.error("/worker/score-daily error", err);
         return sendResponse(res, {status:500, success:false, message: "서버 오류"});
     }
 }
