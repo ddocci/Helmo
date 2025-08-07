@@ -1,10 +1,35 @@
-//날짜 계산 관련 포맷
-// 해당 날짜가 몇 번째 주인지 구하는 함수
-const getWeekNumber = (dateObj) => {
-    return Math.ceil((dateObj.getDate() - 1 - dateObj.getDay()) / 7) + 1;
+// utils/dateUtils.js
+const dayjs = require("dayjs");
+const isoWeek = require("dayjs/plugin/isoWeek");
+dayjs.extend(isoWeek);
+
+// ISO 기준: 해당 날짜의 연도 + 주차 구하기
+const getYearAndWeek = (dateInput) => {
+  const date = dayjs(dateInput);
+  return {
+    year: date.isoWeekYear(),  // ISO 연도
+    week: date.isoWeek(),      // ISO 주차
+  };
 };
 
-// 해당 날짜의 연도를 구하는 함수
-const getScoreYear = (dateObj) => dateObj.getFullYear();
+// 연도 + 월 구하기
+const getYearAndMonth = (dateInput) => {
+  const date = dayjs(dateInput);
+  return {
+    year: date.year(),
+    month: date.month() + 1,   // dayjs는 0~11 → +1 보정
+  };
+};
 
-module.exports = {getWeekNumber, getScoreYear};
+// 단일 항목 getter (필요 시)
+const getScoreYear = (dateInput) => dayjs(dateInput).year();
+const getMonth = (dateInput) => dayjs(dateInput).month() + 1;
+const getWeek = (dateInput) => dayjs(dateInput).isoWeek();
+
+module.exports = {
+  getYearAndWeek,
+  getYearAndMonth,
+  getScoreYear,
+  getMonth,
+  getWeek,
+};

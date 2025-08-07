@@ -1,8 +1,9 @@
 const db = require("../config/db");
 const sendResponse = require("../utils/response");
-const {getWeekNumber, getScoreYear} = require("../utils/dateUtils");
+const {getWeek, getScoreYear} = require("../utils/dateUtils");
 const { getTimeDuration } = require("../utils/timeUtils");
 const { getConditionalStat } = require("../utils/statUtil");
+const { getDailyScores, getWeeklyScores } = require("../utils/scoreUtil");
 
 exports.getDailyScore = async (req, res) => {
     const userId = req.user.userId;
@@ -15,22 +16,7 @@ exports.getDailyScore = async (req, res) => {
         let lastTime = null;
         let duration = null;
 
-        const [rows] = role === "worker" ? 
-            await db.query( // time_slot: 발생 시간, deduction_reason: 감점 사유, detection_count: 감지된 객체 수, violation_count: 감지된 미착용자 수
-                `SELECT time_slot, deduction_reason, detection_count, violation_count
-                FROM score
-                WHERE user_id = ? AND score_date = ?
-                ORDER BY time_slot
-                `, [userId, date]) :
-            await db.query( // 관리자인 경우 관리하는 모든 현장의 내용 호출
-                `SELECT time_slot, deduction_reason, detection_count, violation_count
-                FROM score
-                WHERE score_date = ? AND user_id IN (SELECT user_id
-                                                       FROM users
-                                                      WHERE superior_id = ?)
-                ORDER BY time_slot
-                `, [date, userId]
-            );
+        const [rows] = await getDailyScores(role, userId, date);
 
         if(rows.length !== 0){
             violationTotal = getConditionalStat(rows, "violation_count", () => true, {mode: "total"});
@@ -40,23 +26,10 @@ exports.getDailyScore = async (req, res) => {
         }
 
         const dateObj = new Date(date);
-        const weekNumber = getWeekNumber(dateObj);
+        const weekNumber = getWeek(dateObj);
         const scoreYear = getScoreYear(dateObj);
 
-        const [weeklyRow] = role === "worker" ? 
-            await db.query(
-                `SELECT average_score, grade
-                 FROM weekly_score
-                 WHERE user_id = ? AND score_year = ? AND week_number = ?
-                `, [userId, scoreYear, weekNumber]) : 
-            await db.query(
-                `SELECT average_score, grade
-                 FROM weekly_score
-                 WHERE score_year = ? AND week_number = ? AND user_id IN (SELECT user_id
-                                                                            FROM users
-                                                                           WHERE superior_id = ?)
-                `, [scoreYear, weekNumber, userId]
-            );
+        const [weeklyRow] = await getWeeklyScores(role, userId, scoreYear, weekNumber);
         
         if(rows.length === 0 && weeklyRow.length === 0){ // 당일 기록도 없고, 그 주의 기록도 없는 경우 (ex-다음 달 등 미래)
             return sendResponse(res, {data: null});
@@ -67,7 +40,7 @@ exports.getDailyScore = async (req, res) => {
                 data: {
                     violationTotal,
                     recordedDuration: duration,
-                    weekly: weeklyRow[0] || null
+                    weekly: weeklyRow[0] || null,
                 }
             });
         }
