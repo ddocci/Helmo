@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import html2pdf from "html2pdf.js";
 import "../css/Statistics/statistics.css";
 
+import Header from "../components/Header";
+
 // Chart.js 요소 등록
 import {
   Chart as ChartJS,
@@ -138,22 +140,13 @@ const lineData = {
     ],
   };
 
-  const pieData = {
-    labels: ["A구역", "B구역", "C구역", "D구역"],
-    datasets: [
-      {
-        data: statisticsData.pie || [],
-        backgroundColor: ["#4a6ef5", "#6fa3f7", "#8fc1f7", "#b5d3fa"],
-      },
-    ],
-  };
-
   return (
     <div className="statistics-wrapper" ref={pdfRef}>
-      <div className="statistics-header">
+      <Header/>
+      {/* <div className="statistics-header">
         <h2>전체 통계</h2>
         <img src="/logo.png" alt="Helmo Logo" className="statistics-logo" />
-      </div>
+      </div> */}
 
       <div className="statistics-summary">
         <h3>이미지 기반 안전모 착용 현황 분석</h3>
@@ -224,13 +217,6 @@ const lineData = {
       <div className="chart-section">
         <h3>평균 시간대별 미착용 감지 분포</h3>
         <Bar data={barData} />
-      </div>
-
-      <div className="chart-section">
-        <h3>부서별 착용률</h3>
-        <div className="pie-chart">
-          <Pie data={pieData} />
-        </div>
       </div>
 
       <div className="pdf-download">

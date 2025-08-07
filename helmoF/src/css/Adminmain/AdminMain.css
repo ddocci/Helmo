@@ -7,5 +7,6 @@ body {
 .admin-container {
   max-width: 1000px;
   margin: 40px auto;
+  padding-top: 64px;
   padding: 0 40px;
 }

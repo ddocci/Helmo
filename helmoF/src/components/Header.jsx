@@ -1,10 +1,17 @@
+// src/components/Header.jsx
 import React from 'react';
 import '../css/Header.css';
 
 const Header = () => {
   return (
-    <header className="login-header">
-      <img src="/helmo_header.png" alt="Helmo Logo" />
+    <header className="header">
+      <div className="logo-container">
+        <div className="logo-icon" />
+        <span className="logo-text">
+          <span className="bold">Hel</span>
+          <span className="light">mo</span>
+        </span>
+      </div>
     </header>
   );
 };
