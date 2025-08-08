@@ -8,8 +8,8 @@ const Header = () => {
       <div className="logo-container">
         <div className="logo-icon" />
         <span className="logo-text">
-          <span className="bold">Hel</span>
-          <span className="light">mo</span>
+          <span className="bold"></span>
+          <span className="light"></span>
         </span>
       </div>
     </header>

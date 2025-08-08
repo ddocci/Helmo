@@ -13,6 +13,12 @@ const AdminCalendar = ({ selectedDate, onDateChange, onDayClick, dailyData }) =>
         onChange={onDateChange}
         value={selectedDate}
         locale="ko-KR"
+        calendarType="gregory"
+        onClickDay={onDayClick}
+        next2Label={null}
+        prev2Label={null}
+        formatMonthYear={(locale, date) => `${date.getFullYear()}년 ${date.getMonth() + 1}월`} // 문자열로!
+        formatDay={(locale, date) => String(date.getDate())}  // ← 여기 추가!
         tileClassName={({ date }) => {
           const key = formatDate(date);
           if (dailyData[key]) {
@@ -20,7 +26,6 @@ const AdminCalendar = ({ selectedDate, onDateChange, onDayClick, dailyData }) =>
           }
           return null;
         }}
-        onClickDay={onDayClick}
       />
     </div>
   );

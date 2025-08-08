@@ -21,8 +21,8 @@
 }
 
 .logo-icon {
-  width: 24px;
-  height: 24px;
+  width: 100px;
+  height: 50px;
   background-image: url('/logo.png');
   background-size: contain;
   background-repeat: no-repeat;

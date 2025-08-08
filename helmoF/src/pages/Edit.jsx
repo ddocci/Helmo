@@ -28,7 +28,7 @@ const Edit = () => {
   const { currentUser } = useContext(AuthContext);
 
   const handleBack = () => navigate(`/adminmain`);
-  const handleRetouch = () => navigate(`/retouch/${date}`, { state: { selectedDate: date } });
+  // const handleRetouch = () => navigate(`/retouch/${date}`, { state: { selectedDate: date } });
   const handleMain = () => navigate(`/adminmain`);
   const handleStatistics = () => navigate("/Statistics");
 
@@ -39,7 +39,10 @@ const Edit = () => {
         <Header/>
         <main className="edit-main">
           <EditDateScore year={year} month={month} day={day} />
-          <EditTimeline onRetouch={handleRetouch} />
+          <EditTimeline onSave={(reason) => {
+            alert("저장되었습니다.");
+            console.log("입력된 변경사유 :", reason);
+          }} />
           <EditDailyRecord />
           <EditWeeklyRecord />
           <EditBottomButtons onMain={handleMain} onStatistics={handleStatistics} />
