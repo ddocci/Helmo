@@ -3,7 +3,7 @@ const sendResponse = require("../utils/response");
 const {getWeek, getScoreYear} = require("../utils/dateUtils");
 const { getTimeDuration } = require("../utils/timeUtils");
 const { getConditionalStat } = require("../utils/statUtil");
-const { getDailyScores, getWeeklyScores } = require("../utils/scoreUtil");
+const { getDailyScores, getWeeklyScores } = require("../services/getScoreService");
 
 exports.getDailyScore = async (req, res) => {
     const userId = req.user.userId;
