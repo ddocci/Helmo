@@ -1,32 +1,29 @@
-// 로그인 인증 여부 정보 저장
-import React, { createContext, useState, useEffect } from 'react'
-
-import axios from "../axios"; //withCredentials: true(쿠키 기반 인증이 설정된 인스턴스)
+// AuthContext.jsx
+import React, { createContext, useState, useEffect } from "react";
+import api from "../axios";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(null);
-    const [loading, setLoading] = useState(true); //로그인 시 로딩 확인
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-        const checkLogin = async () => {
-            try{
-                const res = await axios.get("/me");
-                setCurrentUser(res.data.user);
-            } catch(err) {
-                setCurrentUser(null);
-            } finally {
-                setLoading(false); //로딩 완료
-            }
-        };
+  useEffect(() => {
+    (async () => {
+      // 401도 에러로 throw 하지 않게
+      const res = await api.get("/me", { validateStatus: () => true });
+      if (res.status === 200 && res.data?.user) {
+        setCurrentUser(res.data.user);
+      } else {
+        setCurrentUser(null);
+      }
+      setLoading(false);
+    })();
+  }, []);
 
-        checkLogin();
-    },[])
-
-    return (
-        <AuthContext.Provider value={{ currentUser, setCurrentUser, loading }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ currentUser, setCurrentUser, loading }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
