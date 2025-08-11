@@ -9,9 +9,25 @@ const { calComplianceRate } = require("../utils/calRateGrade");
 
 const getMonthlyStatistics = async (req, res) => {
     const adminId = req.user.userId;
-    const year = Number(req.query.year);
-    const month = Number(req.query.month);
 
+    // 우선순위: year/month > date
+    let year = Number(req.query.year);
+    let month = Number(req.query.month);
+    const dateStr = req.query.date; // YYYY-MM-DD
+
+    // year/month가 없고 date가 있으면 변환
+    if ((!Number.isFinite(year) || !Number.isFinite(month)) && dateStr) {
+      const d = dayjs(dateStr);
+      if (!d.isValid()) {
+        return sendResponse(res, { status: 400, success: false, message: "date 파라미터가 유효하지 않습니다." });
+      }
+      year = d.isoWeekYear();
+      month = d.month() + 1;
+    }
+
+    if (!Number.isFinite(year) || !Number.isFinite(month)) {
+      return sendResponse(res, { status: 400, success: false, message: "year/month 파라미터가 유효하지 않습니다." });
+    }
     // options
     const view = (req.query.view || "both").toLowerCase(); // summary | detail | both
     const includeMissing = String(req.query.include_missing || "false") === "true";
@@ -44,7 +60,7 @@ const getMonthlyStatistics = async (req, res) => {
         // 관할 작업자(현장) 별 detail 데이터: month_grade 테이블과 users 테이블에서 조회
         const [rows] = await db.query(
             `
-            SELECT 
+            SELECT *
             FROM month_grade mg JOIN users u
                 ON mg.user_id = u.user_id
             WHERE mg.score_year = ? AND mg.score_month = ? AND u.superior_id = ?
@@ -57,7 +73,7 @@ const getMonthlyStatistics = async (req, res) => {
         // 관할 작업자 별 데이터 객체를 배열에 저장
         const perSite = rows.map(r => ({
             user_id: r.user_id,
-            worker_name: r.worker_name || null,
+            worker_name: r.name || null,
             total_score: Number(r.total_score || 0),
             average_score: Number(r.average_score || 0),
             working_days: Number(r.working_days || 0),
@@ -92,12 +108,10 @@ const getMonthlyStatistics = async (req, res) => {
         const [sumRows] = await db.query(
             `
             SELECT COALESCE(SUM(detection_count), 0) AS total_detection,
-                   COALESCE(SUM(violation_count), 0) AS total_violation,
-                   COUNT(DISTINCT CASE WHEN user_id IN (${inClause})
-                                                    THEN DATE(score_date) END) AS dummy --(미사용, 예시)
+                   COALESCE(SUM(violation_count), 0) AS total_violation
             FROM score
             WHERE score_date BETWEEN ? AND ?
-              AND user_id IN (${inclause})
+              AND user_id IN (${inClause})
             `,  // 바인딩 순서: 날짜 2개 + user_ids + user_ids (위 쿼리에서 IN 절을 2번 쓰지 않는다면 한 번만 넘겨도 됨)
             [start.format("YYYY-MM-DD"), end.format("YYYY-MM-DD"), ...workerIds]
         );

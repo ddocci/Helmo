@@ -3,14 +3,30 @@
 const db = require("../config/db");
 const sendResponse = require("../utils/response");
 const { computeWeeklyScore } = require("../services/getStatScoreService");
-const { dayjs, getIsoWeekRange } = require("../utils/dateUtils");
+const { dayjs, getIsoWeekRange, getIsoWeekYear, dateFromIsoYearWeek } = require("../utils/dateUtils");
 const {calComplianceRate} = require("../utils/calRateGrade");
 
 // GET: /api/admin/weekly-stat?year=0000&week=00&view=aaa&include_missing=false&sort_by=average_score&order=desc&limit=50&offset=0
 const getWeeklyStatistics = async (req, res) => {
     const adminId = req.user.userId;
-    const year = Number(req.query.year);
-    const week = Number(req.query.week);
+    // 우선순위: year/week > date
+    let year = Number(req.query.year);
+    let week = Number(req.query.week);
+    const dateStr = req.query.date; // YYYY-MM-DD
+
+    // year/week가 없고 date가 있으면 변환
+    if ((!Number.isFinite(year) || !Number.isFinite(week)) && dateStr) {
+        const d = dayjs(dateStr);
+        if (!d.isValid()) {
+        return sendResponse(res, { status: 400, success: false, message: "date 파라미터가 유효하지 않습니다." });
+        }
+        year = getIsoWeekYear(d);
+        week = d.isoWeek();
+    }
+
+    if (!Number.isFinite(year) || !Number.isFinite(week)) {
+        return sendResponse(res, { status: 400, success: false, message: "year/week 파라미터가 유효하지 않습니다." });
+    }
 
     // options
     const view = (req.query.view || "both").toLowerCase(); // summary | detail | both
@@ -20,11 +36,6 @@ const getWeeklyStatistics = async (req, res) => {
 
 
     try {
-        // 파라미터 검증
-        if(!Number.isFinite(year) || Number.isFinite(week)){
-            return sendResponse(res, {status:400, success:false, message:"year/week 파라미터가 유효하지 않습니다."});
-        }
-
         // 관리자 관할 작업자 목록
         const [workers] = await db.query(`SELECT user_id, name FROM users WHERE superior_id = ?`, [adminId]);
         const workerIds = workers.map(w => w.user_id);
@@ -63,7 +74,7 @@ const getWeeklyStatistics = async (req, res) => {
         // 집계 테이블(weekly_score)에 없는 현장 데이터 보강 -> score 테이블에서 계산하여 사용
         // 만약 그 주에 해당 현장의 탐지된 객체가 0인 경우 필요
         // 확인하고 있는 주의 수요일 날짜
-        const anyDate = dayjs().isoWeekYear(year).isoWeek(week).isoWeekday(3);
+        const anyDate = dateFromIsoYearWeek(year, week, 3);
 
         if(includeMissing) {
             const present = new Set(perSite.map(p => p.user_id));

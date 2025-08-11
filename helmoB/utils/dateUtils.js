@@ -1,16 +1,26 @@
 const dayjs = require("dayjs");
 const isoWeek = require("dayjs/plugin/isoWeek");
-const isoWeekday = require("dayjs/plugin/isoWeekday");
 const utc = require("dayjs/plugin/utc");
 dayjs.extend(utc);
 dayjs.extend(isoWeek);
-dayjs.extend(isoWeekday);
+
+// ISO 주차 연도 구하기(규칙: 해당 주의 목요일이 속한 연도)
+const getIsoWeekYear = (dateInput) => {
+  return dayjs(dateInput).isoWeekday(4).year();
+};
+
+// ISO 연/주 -> 임의의 요일(기본 수요일 = 3) 날짜 만들기
+// isoWeek 1의 기준으로 1월 4일은 반드시 IsO 1주에 들어감
+const dateFromIsoYearWeek = (isoYear, isoWeekNumber, isoWeekdayNumber = 3) => {
+  const jan4 = dayjs(`${isoYear}-01-04`);
+  return jan4.isoWeek(isoWeekNumber).isoWeekday(isoWeekdayNumber);
+}
 
 // ISO 기준: 해당 날짜의 연도 + 주차 구하기
 const getYearAndWeek = (dateInput) => {
   const date = dayjs(dateInput);
   return {
-    year: date.isoWeekYear(),  // ISO 연도
+    year: getIsoWeekYear(date),  // ISO 연도
     week: date.isoWeek(),      // ISO 주차
   };
 };
@@ -45,6 +55,8 @@ const getMonthRange = (dateInput) => {
 
 module.exports = {
   dayjs,
+  getIsoWeekYear,
+  dateFromIsoYearWeek,
   getYearAndWeek,
   getYearAndMonth,
   getScoreYear,
