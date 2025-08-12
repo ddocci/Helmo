@@ -64,7 +64,14 @@ const Statistics = () => {
 
   // 페이지 이동
   const goToMain = () => navigate("/adminmain");
-  const goToEdit = () => navigate(`/edit/${passedDate}`);
+  const goToEdit = () => {
+    if(year === passedDate.getFullYear() && month === passedDate.getMonth() + 1){
+      navigate(`/edit/${year}-${String(month).padStart(2,0)}-${passedDate.getDate()}`);
+    } else {
+      navigate(`/edit/${year}-${String(month).padStart(2,0)}-01`);
+    }
+  };
+    
 
   // PDF 저장
   const handleDownloadPDF = () => {

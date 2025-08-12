@@ -21,6 +21,7 @@ exports.getDailyScore = async (req, res) => {
 
         if(rows.length !== 0){
             score = getConditionalStat(rows, "score", ()=>true, {mode: "average"});
+            detectionTotal = getConditionalStat(rows, "detection_count", ()=>true, {mode: "total"});
             violationTotal = getConditionalStat(rows, "violation_count", () => true, {mode: "total"});
             firstTime = rows[0].time_slot;
             lastTime = rows[rows.length - 1].time_slot;
@@ -42,6 +43,7 @@ exports.getDailyScore = async (req, res) => {
             return sendResponse(res, {
                 data: {
                     score,
+                    detectionTotal,
                     violationTotal,
                     recordedDuration: duration,
                     weekly: weeklyRow[0] || null,
@@ -49,7 +51,7 @@ exports.getDailyScore = async (req, res) => {
             });
         }
     } catch (err) {
-        console.error("/worker/score-daily error", err);
+        console.error(`/api/${role}/score-daily error`, err);
         return sendResponse(res, {status:500, success:false, message: "서버 오류"});
     }
 }

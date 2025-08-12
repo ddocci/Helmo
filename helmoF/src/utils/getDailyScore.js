@@ -22,7 +22,7 @@ export const makeHandleDateClick = ({ role, setSelectedDate, setSelectedData, se
 
     try {
       // 역할별(작업자/관리자) 엔드포인트 분기
-      // 백엔드에서 admin 전용 계산법이 이미 구현되어 있으니 경로만 호출
+      // 백엔드에서 worker/admin 전용 계산법이 이미 구현되어 있으니 경로만 호출
       const url = role === "admin" ? "/admin/score-daily" : "/worker/score-daily";
 
       const { data } = await axios.get(url, { params: { date: ymd } });
