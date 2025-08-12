@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import "../css/Adminmain/AdminMain.css";
 import "../css/Adminmain/AdminCalender.css";
 import "../css/Adminmain/AdminCard.css";
@@ -11,23 +11,35 @@ import WorkInfoBanner from '../components/workmain/WorkInfoBanner';
 import WorkCalendar from '../components/workmain/WorkCalendar';
 import WorkDataCard from '../components/workmain/WorkDataCard';
 
+import axios from "../axios.js";
+import { AuthContext } from "../contexts/AuthContext.jsx";
+import { makeHandleDateClick } from "../utils/getDailyScore.js";
+
 const Workmain = () => {
+  const { currentUser } = useContext(AuthContext);
+  const role = currentUser?.role || "worker";
+
   const [selectedDate, setSelectedDate] = useState(new Date());
-
-  const dailyData = {
-    "2025-08-13": { score: 7, people: 18, hours: "12", weeklyGrade: "B+", weeklyAvg: "6.0" },
-    "2025-08-24": { score: 15, people: 25, hours: "16", weeklyGrade: "A-", weeklyAvg: "7.2" },
-    "2025-08-27": { score: 3, people: 20, hours: "14", weeklyGrade: "B+", weeklyAvg: "6.2" },
-  };
-
-  const formatDate = (date) => date.toISOString().split("T")[0];
-  const selectedData = dailyData[formatDate(selectedDate)] || {
+  const [selectedData, setSelectedData] = useState({
     score: "-",
-    people: 0,
+    people: "-",
     hours: "-",
     weeklyGrade: "-",
     weeklyAvg: "-"
-  };
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  
+  const handleDateClick = makeHandleDateClick({
+    role,
+    setSelectedDate,
+    setSelectedData,
+    setLoading,
+    setError,
+  });
+
+
 
   return (
     <div className="admin-container">
@@ -36,7 +48,8 @@ const Workmain = () => {
       <WorkCalendar
         selectedDate={selectedDate}
         onChange={setSelectedDate}
-        dailyData={dailyData}
+        onDateClick={handleDateClick}
+        // dailyData={dailyData}
       />
       <WorkDataCard selectedDate={selectedDate} selectedData={selectedData} />
     </div>

@@ -15,15 +15,18 @@ exports.getDailyScore = async (req, res) => {
         let firstTime = null;
         let lastTime = null;
         let duration = null;
+        let score = null;
 
         const [rows] = await getDailyScores(role, userId, date);
 
         if(rows.length !== 0){
+            score = getConditionalStat(rows, "score", ()=>true, {mode: "average"});
             violationTotal = getConditionalStat(rows, "violation_count", () => true, {mode: "total"});
             firstTime = rows[0].time_slot;
             lastTime = rows[rows.length - 1].time_slot;
             duration = getTimeDuration(firstTime, lastTime);
         }
+
 
         const dateObj = new Date(date);
         const weekNumber = getWeek(dateObj);
@@ -34,10 +37,11 @@ exports.getDailyScore = async (req, res) => {
         if(rows.length === 0 && weeklyRow.length === 0){ // 당일 기록도 없고, 그 주의 기록도 없는 경우 (ex-다음 달 등 미래)
             return sendResponse(res, {data: null});
         } else if(rows.length === 0){ // 당일 기록은 없지만, 그 주의 기록은 있는 경우 (ex-주말 등 작업이 없는 날)
-            return sendResponse(res, {data: {violationTotal: 0, recordedDuration: "00시간 00분", weekly: weeklyRow[0] || null}});
+            return sendResponse(res, {data: {weekly: weeklyRow[0] || null}});
         } else{ // 일반적인 작업이 있었던 날의 경우
             return sendResponse(res, {
                 data: {
+                    score,
                     violationTotal,
                     recordedDuration: duration,
                     weekly: weeklyRow[0] || null,

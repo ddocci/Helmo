@@ -6,7 +6,7 @@ const { computeWeeklyScore } = require("../services/getStatScoreService");
 const { dayjs, getIsoWeekRange, getIsoWeekYear, dateFromIsoYearWeek } = require("../utils/dateUtils");
 const {calComplianceRate} = require("../utils/calRateGrade");
 
-// GET: /api/admin/weekly-stat?year=0000&week=00&view=aaa&include_missing=false&sort_by=average_score&order=desc&limit=50&offset=0
+// GET: /api/admin/weekly-stat?date=yyyy-mm-dd&view=aaa&include_missing=false&sort_by=average_score&order=desc&limit=50&offset=0
 const getWeeklyStatistics = async (req, res) => {
     const adminId = req.user.userId;
     // 우선순위: year/week > date

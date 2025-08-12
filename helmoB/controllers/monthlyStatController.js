@@ -1,5 +1,5 @@
 // 월간 통계 컨트롤러
-// GET: /api/admin/monthly-stat?year=0000&month=00&view=___&include_missing=false&sort_by=____&order=desc
+// GET: /api/admin/monthly-stat?date=yyyy-mm-dd&view=___&include_missing=false&sort_by=____&order=desc
 
 const db = require("../config/db");
 const sendResponse = require("../utils/response");

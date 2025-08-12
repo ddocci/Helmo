@@ -6,5 +6,5 @@ exports.getTimeDuration = (startTime, endTime) => {
 
     const diffH = Math.floor(diffMs / (1000 * 60 * 60));
     const diffM = Math.floor((diffMs%(1000 * 60 * 60)) / (1000 * 60));
-    return `${diffH}시간 ${diffM}분`;
+    return `${startTime} ~ ${endTime} (총 ${diffH}시간 ${diffM}분)`;
 };

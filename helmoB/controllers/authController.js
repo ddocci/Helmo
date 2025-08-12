@@ -16,7 +16,7 @@ exports.login = async(req, res) => {
         // // 비밀번호 해시 확인
         // const match = await bcrypt.compare(password, user.password);
 
-        const match = await (password === user.password);
+        const match = await (password === user.password);   
         if (!match) {
         return sendResponse(res, {success: false, message: "비밀번호 불일치"});
         }
@@ -28,7 +28,10 @@ exports.login = async(req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
+            sameSite: "lax",
             secure: false,
+            path: "/",
+            maxAge: 1000 * 60 * 60,
         });
 
         return sendResponse(res, {success: true, data: {token, userId: user.user_id, role: user.role}});

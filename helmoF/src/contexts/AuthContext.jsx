@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
         const checkLogin = async () => {
             try{
                 const res = await axios.get("/me");
-                setCurrentUser(res.data.user);
+                setCurrentUser(res.data.data);
             } catch(err) {
                 setCurrentUser(null);
             } finally {
