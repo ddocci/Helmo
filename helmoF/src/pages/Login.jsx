@@ -28,8 +28,8 @@ const Login = () => {
       });
 
       if (response.data.success) {
-        const { userId, role } = response.data.data;
-        setCurrentUser({userId, role});// 로그인 상태 저장
+        const userId = response.data.userId;
+        setCurrentUser({userId: userId, role});// 로그인 상태 저장
         if (role === 'admin') {
           navigate(`/adminmain`);
         } else {
