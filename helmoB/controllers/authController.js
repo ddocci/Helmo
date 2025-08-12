@@ -1,12 +1,13 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt"); // 해시 안쓰면 제거해도 됨
-const db = require("../config/db"); // 네가 쓰는 커넥션 모듈
+const db = require("../config/db2"); // 네가 쓰는 커넥션 모듈
 
 exports.login = async (req, res) => {
   const { id, password } = req.body;
   console.log(req.body);
 
   try {
+    // const [rows] = await db.query("SELECT * FROM users WHERE user_id = ?", [id]);
     const [rows] = await db.query("SELECT * FROM users WHERE user_id = ?", [id]);
     if (rows.length === 0) {
       return res.json({ success: false, message: "존재하지 않는 사용자" });
@@ -14,7 +15,6 @@ exports.login = async (req, res) => {
     const user = rows[0];
     console.log(user.role);
 
-    // 평문 비교 (해시라면 bcrypt.compare 사용)
     const match = password === user.password;
     if (!match) {
       return res.json({ success: false, message: "비밀번호 불일치" });

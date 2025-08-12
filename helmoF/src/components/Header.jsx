@@ -1,10 +1,15 @@
 import React from 'react';
-import '../css/Header.css';
+import "../css/Header.css"
 
-const Header = () => {
+const Header = ({text}) => {
   return (
-    <header className="login-header">
-      <img src="/helmo_header.png" alt="Helmo Logo" />
+    <header className="Header">
+      <div className="Header_left">
+        <img className="Header_logo" src="../public/logo.png" alt="Helmo logo" />
+      </div>
+      <div className='Header_center'>
+        <span className='Header_noticeText'>{text}</span>
+      </div>
     </header>
   );
 };

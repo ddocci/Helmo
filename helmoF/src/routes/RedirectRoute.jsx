@@ -9,7 +9,7 @@ const RedirectRoute = () => {
   useEffect(() => {
     if (loading) return;
     if (!currentUser) { navigate("/login", { replace: true }); return; }
-
+    
     const role = String(currentUser.role || "").toLowerCase().trim();
     console.log("[RedirectRoute] role =", role); // 임시 확인용
 

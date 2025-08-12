@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import api from "../axios";
+import api from "../../axios";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
-import "../css/Form.css";
+import { AuthContext } from "../../contexts/AuthContext";
+import "../../css/Form.css";
 
 const Form = ({ id, setId, pw, setPw }) => {
   const nav = useNavigate();
