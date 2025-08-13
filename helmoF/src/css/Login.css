@@ -1,13 +1,13 @@
 .login-box {
   position: relative;
-  width: 500px;
-  height: 600px;
+  width: 400px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   /* ✅ 반투명 흰색 배경 */
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(15px);
 
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -48,7 +48,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center; /* ✅ 수직 가운데 정렬 */
-  padding: 2rem;
+  padding:0.2rem;
   flex-grow: 1;
   box-sizing: border-box;
 }

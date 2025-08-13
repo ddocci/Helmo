@@ -45,7 +45,7 @@
 /* 중앙 로고 */
 .logo-icon {
   width: 100px;
-  height: 50px;
+  height: 57px;
   background-image: url('/logo.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -56,8 +56,8 @@
 
 /* 로그아웃 버튼 */
 .logout-button {
-  width: 28px;
-  height: 28px;
+  width: 25px;
+  height: 25px;
   background-image: url('/exit.png') !important;
   background-size: contain;   /* 이미지 크기 맞춤 */
   background-repeat: no-repeat;
@@ -115,6 +115,7 @@
 
 .sidebar-menu li {
   margin-bottom: 1rem;
+  font-size: 20px;
 }
 
 .sidebar-menu a {

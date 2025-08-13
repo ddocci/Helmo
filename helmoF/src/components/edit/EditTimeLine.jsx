@@ -10,8 +10,7 @@ const EditTimeline = ({ onSave }) => {
 
   return (
     <section className="timeline-section">
-      <h3>타임별 이미지 관리</h3>
-      <button className="edit-btn" onClick={handleSave}>저장하기</button>
+      <h3 className="timeline-title">타임별 이미지 관리</h3>
 
       <div className="timeline-grid">
         {["09:00", "12:00", "15:00", "18:00"].map((time, idx) => (
@@ -28,6 +27,10 @@ const EditTimeline = ({ onSave }) => {
         value={reason}
         onChange={(e) => setReason(e.target.value)}
       />
+
+      <div className="save-btn-container">
+        <button className="save-btn" onClick={handleSave}>저장하기</button>
+      </div>
     </section>
   );
 };

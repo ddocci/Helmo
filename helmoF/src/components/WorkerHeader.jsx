@@ -13,7 +13,7 @@ const WorkerHeader = () => {
         </div>
 
         <div className="header-center">
-          <div className="logo-icon"/>
+          <div className="workerLogo-icon"/>
         </div>
 
         <div className="header-right">
