@@ -1,46 +1,17 @@
-/* src/css/Header.css */
-
-.header {
-  position: fixed;            /* 상단 고정 */
-  top: 0;                     /* 최상단 위치 */
-  left: 0;
-  width: 100vw;               /* 전체 화면 너비 */
-  height: 64px;               /* 고정 높이 */
-  background-color: #f8f9fb;
-  padding: 0 2rem;
+.login-header {
+  width: 110%;
+  height: 60px;
+  background-color: #aedaf3;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  z-index: 1000;              /* 다른 요소보다 위에 */
+  justify-content: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 20px 0px;
+  box-sizing: border-box;
 }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-}
-
-.logo-icon {
-  width: 100px;
-  height: 50px;
-  background-image: url('/logo.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-right: 0.5rem;
-}
-
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.logo-text .bold {
-  color: #005b9f;
-  font-weight: 700;
-}
-
-.logo-text .light {
-  color: #bbb;
-  font-weight: 400;
+.login-header img {
+  height: 40px;
+  object-fit: contain;
 }

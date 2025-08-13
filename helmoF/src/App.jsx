@@ -14,7 +14,6 @@ import Layout from "./components/Layout"
 import PrivateRoute from './routes/PrivateRoute'
 import { AuthProvider } from './contexts/AuthContext'
 import RedirectRoute from './routes/RedirectRoute'
-import ScrollToTop from './components/ScrollToTop'
 // import './App.css'
 
 
@@ -23,7 +22,6 @@ function App() {
   return (
     <>
     <AuthProvider>
-      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Login/>}/>
         <Route path="/login" element={<Login/>}/>    

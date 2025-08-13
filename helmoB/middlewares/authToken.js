@@ -1,20 +1,26 @@
-// 토큰 검증 로직
+// middlewares/authToken.js
 const jwt = require("jsonwebtoken");
 
-const authToken = (req, res, next) => {
-    const token = req.cookies.token;
+// 쿠키(token) 또는 Authorization: Bearer 토큰 허용
+function authToken(req, res, next) {
+  const bearer = req.get("Authorization");
+  const headerToken = bearer?.startsWith("Bearer ")
+    ? bearer.slice(7)
+    : undefined;
 
-    if (!token) {
-        return res.status(401).json({message: "존재하지 않는 토큰"});
-    }
+  const cookieToken = req.cookies?.token;
+  const token = headerToken || cookieToken;
 
-    try{
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
-        next();
-    } catch(err){
-        return res.status(403).json({message: "유효하지 않은 토큰"});
-    }
-};
+  if (!token) {
+    return res.status(401).json({ error: "No token" });
+  }
+  try {
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = payload; // { userId, role, iat, exp }
+    next();
+  } catch (e) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+}
 
 module.exports = authToken;

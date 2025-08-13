@@ -1,37 +1,31 @@
-import React, { useContext } from 'react'
-import { Navigate, useLocation, useParams } from "react-router-dom"
-import { AuthContext } from "../contexts/AuthContext"
+import React, { useContext } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 const PrivateRoute = ({ children, allowedRoles }) => {
   const { currentUser, loading } = useContext(AuthContext);
   const location = useLocation();
-  // const { userId } = useParams();
 
+  // 1) 아직 인증 상태 로딩 중이면 렌더 막기
+  if (loading) return null;
 
-  // 아직 로그인 여부를 확인 중일 때 (로딩중)
-  if (loading === true) {
-    return <></>; 
-  }
-
-  // 로그인 안 됨
+  // 2) 비로그인 → 로그인으로
   if (!currentUser) {
-    alert("로그인이 필요한 페이지입니다. 로그인 페이지로 이동합니다.");
+    // 필요하면 alert 주석 해제
+    // alert("로그인이 필요한 페이지입니다. 로그인 페이지로 이동합니다.");
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  // 권한이 없는 경우
-  if (!allowedRoles.includes(currentUser.role)) {
-    alert("접근 권한이 없는 페이지입니다.");
-    return <Navigate to="/redirect" replace />;
+  // 3) 권한 체크(allowedRoles가 주어졌을 때만)
+  if (Array.isArray(allowedRoles) && allowedRoles.length > 0) {
+    if (!allowedRoles.includes(currentUser.role)) {
+      // 필요하면 alert 주석 해제
+      // alert("접근 권한이 없는 페이지입니다.");
+      return <Navigate to="/redirect" replace />;
+    }
   }
 
-  // // 다른 사용자의 페이지에 접근하려고 하는 경우
-  // if (userId && currentUser.userId !== userId) {
-  //   alert("다른 유저의 페이지에 접근할 수 없습니다.");
-  //   return <Navigate to="/redirect" replace />;
-  // }
-
-  // 통과
+  // 4) 통과
   return children;
 };
 

@@ -1,26 +1,33 @@
+// app.js
+require("dotenv").config();
 const express = require("express");
-const path = require("path");
-const bodyParser = require("body-parser");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
-const app = express();
-const loginRouter = require("./routes/loginRouter");
+const db = require("./config/db");
+const authRoutes = require("./routes/authRouter");
 
-// 정적 파일 서빙 (Vite로 빌드된 React 앱)
-app.use(express.static(path.join(__dirname, "../helmoF/dist")));
+const app = express();                 // ← app 생성 먼저!
 
-// POST 요청용 바디 파서
-app.use(bodyParser.urlencoded({ extended: true }));
+// 미들웨어
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.json());
+app.use(cookieParser());
 
-// API 라우터 연결
-app.use("/api", loginRouter);
 
-// React SPA 지원 - 나머지는 index.html 반환
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../helmoF/dist/index.html"));
-});
+// API 라우트
+app.use("/api", authRoutes);
 
-// 서버 실행
-app.listen(3000, () => {
-  console.log("✅ 서버 실행 중: http://localhost:3000");
-});
+// 헬스체크
+app.get("/", (_req, res) => res.send("🟢 Backend running"));
+
+// 서버 시작
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server on http://localhost:${PORT}`));
+
+module.exports = app;
