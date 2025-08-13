@@ -16,24 +16,3 @@
   z-index: 100;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.04);
 }
-
-.footer-content {
-  display: flex;
-  align-items: center;
-  gap: 100px; /* 텍스트와 버튼 사이 간격 조정 */
-}
-
-.logout-button {
-  background-color: #4a90e2;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  font-size: 13px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.logout-button:hover {
-  background-color: #357ab8;
-}

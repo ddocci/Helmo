@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import axios from "../axios";
-import '../css/Footer.css'; // 스타일 분리
+import '../css/Header.css'; // 스타일 분리
 
 const LogoutButton = () => {
   const { setCurrentUser } = useContext(AuthContext);
@@ -20,7 +20,6 @@ const LogoutButton = () => {
 
   return (
     <button className="logout-button" onClick={handleLogout}>
-      로그아웃
     </button>
   );
 };

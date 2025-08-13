@@ -3,8 +3,9 @@ import Calendar from "react-calendar";
 import "../../css/react-calendar-default.css";
 import "../../css/Adminmain/AdminCalender.css";
 
+import {toYmdLocal} from "../../utils/dateToYmd";
 
-const AdminCalendar = ({ selectedDate, onDateChange, onDayClick, dailyData }) => {
+const AdminCalendar = ({ selectedDate, onDateChange, onDayClick, dailyData = {} }) => {
   const formatDate = (date) => date.toISOString().split("T")[0];
 
   return (
@@ -14,7 +15,12 @@ const AdminCalendar = ({ selectedDate, onDateChange, onDayClick, dailyData }) =>
         value={selectedDate}
         locale="ko-KR"
         calendarType="gregory"
-        onClickDay={onDayClick}
+        onClickDay={(date) => {
+            onDateChange?.(date);
+            const ymd = toYmdLocal(date);
+            onDayClick?.(ymd);
+          }
+        }
         next2Label={null}
         prev2Label={null}
         formatMonthYear={(locale, date) => `${date.getFullYear()}년 ${date.getMonth() + 1}월`} // 문자열로!

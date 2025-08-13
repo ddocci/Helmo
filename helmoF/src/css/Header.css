@@ -1,25 +1,48 @@
-/* src/css/Header.css */
-
 .header {
-  position: fixed;            /* 상단 고정 */
-  top: 0;                     /* 최상단 위치 */
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 100vw;               /* 전체 화면 너비 */
-  height: 64px;               /* 고정 높이 */
+  width: 96vw;
+  height: 64px;
   background-color: #f8f9fb;
-  padding: 0 2rem;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+  padding: 0 2rem; /* ✅ 패딩 증가 */
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  z-index: 1000;              /* 다른 요소보다 위에 */
+  z-index: 999;
 }
 
-.logo-container {
+.header-left,
+.header-center,
+.header-right {
+  flex: 1;
   display: flex;
   align-items: center;
 }
 
+.header-left {
+  justify-content: flex-start;
+  background: none !important;
+}
+
+.header-center {
+  justify-content: center;
+}
+
+.header-right {
+  justify-content: flex-end;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+/* 중앙 로고 */
 .logo-icon {
   width: 100px;
   height: 50px;
@@ -27,20 +50,86 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  margin-right: 0.5rem;
+
+  cursor: pointer; /* ✅ 클릭 가능하도록 */
 }
 
-.logo-text {
+/* 로그아웃 버튼 */
+.logout-button {
+  width: 28px;
+  height: 28px;
+  background-image: url('/exit.png');
+  color: #fff;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+  margin-right: 8px; /* ✅ 살짝 띄우기 */
+}
+
+.logout-button:hover {
+  background-color: #004a85;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 64px;
+  left: -250px;
+  width: 250px;
+  height: calc(100% - 64px);
+  background-color: #fff;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.close-button {
   font-size: 1.5rem;
-  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-.logo-text .bold {
-  color: #005b9f;
-  font-weight: 700;
+.sidebar-content {
+  padding: 1rem;
 }
 
-.logo-text .light {
-  color: #bbb;
-  font-weight: 400;
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer; /* ✅ 클릭 가능하도록 */
+}
+
+.sidebar-menu li {
+  margin-bottom: 1rem;
+}
+
+.sidebar-menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 100vw;
+  height: calc(100% - 64px);
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999;
 }
