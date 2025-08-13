@@ -71,6 +71,8 @@ const Statistics = () => {
       navigate(`/edit/${year}-${String(month).padStart(2,0)}-01`);
     }
   };
+    
+
   // PDF 저장
   const handleDownloadPDF = () => {
     const element = pdfRef.current;

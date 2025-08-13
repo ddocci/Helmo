@@ -55,6 +55,7 @@ const AdminMain = () => {
       [role, setSelectedDate, setSelectedData, setLoading, setError]
     );
 
+
   const handleDateClick = (date) => {
     const now = new Date().getTime();
     if (now - lastClickTime < 300) {
@@ -65,7 +66,7 @@ const AdminMain = () => {
       setLastClickTime(now);
       return;
     }
-    setSelectedDate(date);
+    setLastClickTime(now);
 
     onDateFetch(date);
   };

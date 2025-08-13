@@ -34,7 +34,7 @@ exports.getDailyScore = async (req, res) => {
         const scoreYear = getScoreYear(dateObj);
 
         const [weeklyRow] = await getWeeklyScores(role, userId, scoreYear, weekNumber);
-
+        
         if(rows.length === 0 && weeklyRow.length === 0){ // 당일 기록도 없고, 그 주의 기록도 없는 경우 (ex-다음 달 등 미래)
             return sendResponse(res, {data: null});
         } else if(rows.length === 0){ // 당일 기록은 없지만, 그 주의 기록은 있는 경우 (ex-주말 등 작업이 없는 날)

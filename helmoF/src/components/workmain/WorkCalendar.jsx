@@ -1,8 +1,8 @@
 import React from 'react';
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-
-const WorkCalendar = ({ selectedDate, onChange, dailyData }) => {
+import {toYmdLocal} from "../../utils/dateToYmd";
+const WorkCalendar = ({ selectedDate, onChange, dailyData = {}, onDateClick }) => {
   const formatDate = (date) => date.toISOString().split("T")[0];
 
   return (
@@ -10,6 +10,11 @@ const WorkCalendar = ({ selectedDate, onChange, dailyData }) => {
       <Calendar
         onChange={onChange}
         value={selectedDate}
+        onClickDay = {(date) => {
+          onChange?.(date);
+          const ymd = toYmdLocal(date);
+          onDateClick?.(ymd);
+        }}
         locale="ko-KR"
         calendarType="gregory"
         next2Label={null}

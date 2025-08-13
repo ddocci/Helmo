@@ -12,7 +12,6 @@ const getConditionalStat = (rows, key, conditionFn = ()=>true, options = {mode: 
 
     for (const row of rows) {
         if(!conditionFn(row)) continue;
-
         const value = row[key] || 0;
         total += value;
         count++;

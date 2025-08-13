@@ -30,7 +30,7 @@ const Edit = () => {
   const handleBack = () => navigate(`/adminmain`);
   // const handleRetouch = () => navigate(`/retouch/${date}`, { state: { selectedDate: date } });
   const handleMain = () => navigate(`/adminmain`);
-   const handleStatistics = () => navigate("/Statistics", {state: {date: choiceDate}});
+  const handleStatistics = () => navigate("/Statistics", {state: {date: choiceDate}});
 
   return (
     <div className="page-wrapper">

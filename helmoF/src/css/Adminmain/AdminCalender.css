@@ -164,32 +164,3 @@
   color: #d12c2c;
   font-weight: bold;
 }
-
-/* 주간 범위 하이라이트 (옅은 파랑) */
-.in-week {
-  background: #f2f7ff !important;
-  border-radius: 8px;
-}
-
-/* 데이터 있는 날짜 강조 (파랑/빨강) */
-.has-score {
-  background: #e7f1ff !important;
-  color: #0a58ca !important;
-  font-weight: bold;
-  border-radius: 8px;
-}
-
-.has-score-high {
-  background: #ffe7e7 !important;
-  color: #c62828 !important;
-  font-weight: bold;
-  border-radius: 8px;
-}
-
-/* 선택된 날짜가 우선순위 */
-.react-calendar__tile--active {
-  background: #d8eaff !important;
-  color: #0056b3 !important;
-  font-weight: bold;
-  border-radius: 8px;
-}
