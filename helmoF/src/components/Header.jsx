@@ -11,19 +11,18 @@ const Header = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
-  const formatDate = (date) =>
-    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-
-  const goToEditPage = () => {
-    const formatted = formatDate(selectedDate);
-    navigate(`/edit/${formatted}`);
-  };
 
    const goToAdminMain = () => {
     navigate('/adminmain');
   };
 
- 
+  const goToTodayEditPage = () => {
+    const today = new Date();
+    const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    navigate(`/edit/${formattedDate}`);
+  };
+
+
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
@@ -55,7 +54,7 @@ const Header = () => {
         <div className="sidebar-content">
           <ul className="sidebar-menu">
             <li><a href="/adminmain">달력 페이지</a></li>
-            <li><a onClick={goToEditPage}>관리자 페이지</a></li>
+            <li onClick={goToTodayEditPage}>금일 관리 페이지</li>
             <li><a href="/statistics">통계 페이지</a></li>
           </ul>
         </div>

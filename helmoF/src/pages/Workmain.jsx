@@ -5,7 +5,7 @@ import "../css/Adminmain/AdminCard.css";
 import "../css/Adminmain/AdminHeader.css";
 import "../css/Adminmain/AdminInfo.css";
 
-import Header from '../components/Header';
+import WorkerHeader from '../components/WorkerHeader.jsx';
 // import WorkHeader from '../components/workmain/WorkHeader';
 import WorkInfoBanner from '../components/workmain/WorkInfoBanner';
 import WorkCalendar from '../components/workmain/WorkCalendar';
@@ -43,7 +43,7 @@ const Workmain = () => {
 
   return (
     <div className="admin-container">
-      <Header />
+      <WorkerHeader />
       <WorkInfoBanner />
       <WorkCalendar
         selectedDate={selectedDate}

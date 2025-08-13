@@ -58,20 +58,18 @@
 .logout-button {
   width: 28px;
   height: 28px;
-  background-image: url('/exit.png');
-  color: #fff;
+  background-image: url('/exit.png') !important;
+  background-size: contain;   /* 이미지 크기 맞춤 */
+  background-repeat: no-repeat;
+  background-position: center; /* 중앙 정렬 */
   border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 4px;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.2s;
   margin-right: 8px; /* ✅ 살짝 띄우기 */
 }
-
+/* 
 .logout-button:hover {
   background-color: #004a85;
-}
+} */
 
 /* Sidebar */
 .sidebar {

@@ -1,0 +1,58 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 96vw;
+  height: 64px;
+  background-color: #f8f9fb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem; /* ✅ 패딩 증가 */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  z-index: 999;
+}
+
+.header-left,
+.header-center,
+.header-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header-left {
+  justify-content: flex-start;
+  background: none !important;
+}
+
+.header-center {
+  justify-content: center;
+}
+
+.header-right {
+  justify-content: flex-end;
+}
+
+/* 중앙 로고 */
+.logo-icon {
+  width: 100px;
+  height: 50px;
+  background-image: url('/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 로그아웃 버튼 */
+.logout-button {
+  width: 28px;
+  height: 28px;
+  background-image: url('/exit.png') !important;
+  background-size: contain;   /* 이미지 크기 맞춤 */
+  background-repeat: no-repeat;
+  background-position: center; /* 중앙 정렬 */
+  border: none;
+  cursor: pointer;
+  margin-right: 8px; /* ✅ 살짝 띄우기 */
+}
