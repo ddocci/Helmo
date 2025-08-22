@@ -159,19 +159,19 @@ const lineData = {
         <h3>이미지 기반 안전모 착용 현황 분석</h3>
         <div className="summary-controls">
           {/* 왼쪽: 월별 / 연도별 버튼 */}
-          <div className="left-controls">
-            <button
-              className={`summary-btn ${viewMode === "month" ? "active" : ""}`}
+          <div className="statistics-tabbar">
+            <div
+              className={`tab-button ${viewMode === "month" ? "active" : ""}`}
               onClick={() => setViewMode("month")}
             >
               월별 보기
-            </button>
-            <button
-              className={`summary-btn ${viewMode === "year" ? "active" : ""}`}
+            </div>
+            <div
+              className={`tab-button ${viewMode === "year" ? "active" : ""}`}
               onClick={() => setViewMode("year")}
             >
               연도별 보기
-            </button>
+            </div>
           </div>
         </div>
 
