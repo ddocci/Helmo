@@ -45,7 +45,6 @@ const Edit = () => {
           }} />
           <EditDailyRecord />
           <EditWeeklyRecord />
-          <EditBottomButtons onMain={handleMain} onStatistics={handleStatistics} />
         </main>
       </div>
     </div>

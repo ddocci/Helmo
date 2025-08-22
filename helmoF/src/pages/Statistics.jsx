@@ -173,16 +173,6 @@ const lineData = {
               연도별 보기
             </button>
           </div>
-
-          {/* 오른쪽: 메인 / 관리 화면 버튼 */}
-          <div className="right-controls">
-            <button className="summary-btn nav-main" onClick={goToMain}>
-              메인 화면
-            </button>
-            <button className="summary-btn nav-edit" onClick={goToEdit}>
-              관리 화면
-            </button>
-          </div>
         </div>
 
         {/* 네비게이션 */}
