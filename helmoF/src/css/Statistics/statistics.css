@@ -158,7 +158,7 @@
 
 .summary-controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center; /* 버튼 세로 중앙 정렬 */
   margin: 0.5rem 0;
   width: 100%;
