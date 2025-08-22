@@ -1,0 +1,14 @@
+.ResultCard {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 10px;
+  background: #fff;
+}
+
+.ResultContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;  /* ✅ 캘린더 커진 만큼 더 내려주기 */
+}

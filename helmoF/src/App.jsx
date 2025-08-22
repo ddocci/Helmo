@@ -2,7 +2,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 
-import Header from "./components/Header";
 import PrivateRoute from "./routes/PrivateRoute";
 import RedirectRoute from "./routes/RedirectRoute";
 

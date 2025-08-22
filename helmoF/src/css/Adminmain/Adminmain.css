@@ -1,0 +1,19 @@
+.AdminMain {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 헤더만 좌우 꽉 차게 */
+.HeaderWrapper {
+  width: 100vw;          /* 화면 전체 너비 */
+  margin-left: calc(-50vw + 50%); /* 중앙 정렬 시 튀어나온 부분 보정 */
+  background: #fff;      /* 배경색 (원하는 색으로 변경 가능) */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* 살짝 그림자 */
+}
+
+.ResultContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

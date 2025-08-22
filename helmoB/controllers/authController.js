@@ -7,13 +7,11 @@ exports.login = async (req, res) => {
   console.log(req.body);
 
   try {
-    // const [rows] = await db.query("SELECT * FROM users WHERE user_id = ?", [id]);
     const [rows] = await db.query("SELECT * FROM users WHERE user_id = ?", [id]);
     if (rows.length === 0) {
       return res.json({ success: false, message: "존재하지 않는 사용자" });
     }
     const user = rows[0];
-    console.log(user.role);
 
     const match = password === user.password;
     if (!match) {
@@ -21,9 +19,16 @@ exports.login = async (req, res) => {
     }
 
     const role = user.role;
-    const token = jwt.sign({ userId: user.user_id, role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const name = user.name; // ✅ DB에서 가져온 사용자 이름
 
-    // 프록시로 같은 오리진처럼 보이게 하므로 lax/false로 충분
+    // ✅ 토큰에 name 포함
+    const token = jwt.sign(
+      { userId: user.user_id, role, name },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    // 쿠키 설정
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "lax",
@@ -32,7 +37,13 @@ exports.login = async (req, res) => {
       maxAge: 1000 * 60 * 60, // 1h
     });
 
-    return res.json({ success: true, userId: user.user_id, role });
+    // ✅ 응답에도 name 포함
+    return res.json({
+      success: true,
+      userId: user.user_id,
+      role,
+      name,
+    });
   } catch (err) {
     console.error("[login error]", err);
     return res.status(500).json({ success: false, message: "서버 에러" });
@@ -40,7 +51,7 @@ exports.login = async (req, res) => {
 };
 
 exports.getMe = (req, res) => {
-  // auth 미들웨어가 req.user 세팅
+  // auth 미들웨어가 req.user 세팅 (토큰에 name이 있으니 포함됨)
   return res.json({ user: req.user });
 };
 

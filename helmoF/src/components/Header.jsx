@@ -1,15 +1,65 @@
-import React from 'react';
-import "../css/Header.css"
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import "../css/Adminmain/Header.css";
+import { AuthContext } from "../contexts/AuthContext";
 
-const Header = ({text}) => {
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  const goTo = (path) => {
+    navigate(path);
+    setMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    navigate("/login");
+    setMenuOpen(false);
+  };
+
   return (
     <header className="Header">
-      <div className="Header_left">
-        <img className="Header_logo" src="../public/logo.png" alt="Helmo logo" />
+      {/* 햄버거 버튼 */}
+      <div className="Header_menuIcon" onClick={toggleMenu}>
+        ☰
       </div>
-      <div className='Header_center'>
-        <span className='Header_noticeText'>{text}</span>
+
+      {/* 로고 */}
+      <img
+        src="/logo.png"
+        alt="Logo"
+        className="Header_logo"
+        onClick={() => goTo("/adminmain")}
+      />
+
+      {/* 사이드 메뉴 */}
+      <div className={`SideMenu ${menuOpen ? "open" : ""}`}>
+        <button className="CloseBtn" onClick={toggleMenu}>
+          ✕
+        </button>
+        <ul className="MenuList">
+          <li onClick={() => goTo("/adminmain")}>메인 페이지</li>
+          <li onClick={() => goTo("/today")}>금일 관리 페이지</li>
+          <li onClick={() => goTo("/stats")}>통계 페이지</li>
+        </ul>
+
+        {/* 사용자 정보 영역 */}
+        <div className="UserSection">
+          <span className="UserName">
+            {currentUser ? `${currentUser.name} 님` : "게스트"}
+          </span>
+          <button className="LogoutBtn" onClick={handleLogout}>
+            로그아웃
+          </button>
+        </div>
       </div>
+
+      {/* 배경 오버레이 */}
+      {menuOpen && <div className="Overlay" onClick={toggleMenu}></div>}
     </header>
   );
 };

@@ -10,10 +10,9 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      // 401도 에러로 throw 하지 않게
       const res = await api.get("/me", { validateStatus: () => true });
       if (res.status === 200 && res.data?.user) {
-        setCurrentUser(res.data.user);
+        setCurrentUser(res.data.user); // user: { userId, role, name }
       } else {
         setCurrentUser(null);
       }

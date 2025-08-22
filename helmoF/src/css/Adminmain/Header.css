@@ -1,0 +1,129 @@
+.Header {
+  display: flex;
+  justify-content: center;
+  align-items: center;   /* 중앙 기준 */
+  height: 55px;         /* 헤더 높이 고정 */
+  padding: 0 15px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  position: relative;
+  z-index: 100;
+}
+
+/* 햄버거 버튼 */
+.Header_menuIcon {
+  position: absolute;
+  left: 20px;
+  font-size: 35px;   /* 크게 */
+  cursor: pointer;
+  user-select: none;
+  z-index: 110;
+
+  /* ✅ 로고와 같은 높이 맞춤 */
+  top: 50%;
+  transform: translateY(-62%); /* 중앙(-50%)보다 위로 조금 더 올림 */
+}
+
+.Header_logo {
+  width: 118px;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+
+  /* ✅ 중앙에서 확실히 위로 이동 */
+  transform: translateY(-12px);
+}
+
+/* 사이드 메뉴 (기본 숨김) */
+.SideMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  transform: translateX(-100%); /* 기본: 완전히 숨김 */
+  transition: transform 0.3s ease;
+  z-index: 120;
+}
+
+.SideMenu.open {
+  transform: translateX(0); /* 열릴 때만 슬라이드 */
+}
+
+/* 닫기 버튼 */
+.CloseBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  float: right;
+}
+
+/* 메뉴 리스트 */
+.MenuList {
+  list-style: none;
+  padding: 0;
+  margin: 50px 0 0 0;
+}
+
+.MenuList li {
+  padding: 15px 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.MenuList li:hover {
+  color: #3366ff;
+}
+
+/* 사용자 영역 (사이드바 하단 → 메뉴 아래쪽으로 올림) */
+/* 사용자 영역 (하단에서 약간 위로 띄우기) */
+.UserSection {
+  position: absolute;
+  bottom: 50px;   /* 기존 100px → 50px (약 2cm 내려옴) */
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+
+
+.UserName {
+  font-weight: 500;
+}
+
+.LogoutBtn {
+  background: #3366ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.LogoutBtn:hover {
+  background: #254eda;
+}
+
+/* 배경 오버레이 */
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 110;
+}
