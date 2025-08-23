@@ -1,38 +1,26 @@
-// 토큰 검증 로직
+// middlewares/authToken.js
 const jwt = require("jsonwebtoken");
-const sendREsponse = require("../utils/response");
 
-const authToken = (allowedRoles = []) => {
-    return (req, res, next) => {
-        const token = req.cookies.token;
+// 쿠키(token) 또는 Authorization: Bearer 토큰 허용
+function authToken(req, res, next) {
+  const bearer = req.get("Authorization");
+  const headerToken = bearer?.startsWith("Bearer ")
+    ? bearer.slice(7)
+    : undefined;
 
-        if (!token) {
-            return sendREsponse(res, {
-                status: 401,
-                success: false,
-                message: "로그인이 필요합니다."
-            });
-        }
+  const cookieToken = req.cookies?.token;
+  const token = headerToken || cookieToken;
 
-        try{
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            if (allowedRoles.length > 0 && !allowedRoles.includes(decoded.role)){
-                return sendREsponse(res, {
-                    status: 403,
-                    success: false,
-                    message: "접근 권한이 없습니다."
-                });
-            }
-            req.user = decoded;
-            next();
-        } catch(err){
-            return sendREsponse(res, {
-                status: 403,
-                success: false,
-                message: "유효하지 않은 토큰입니다."
-            });
-        }
-    }
-};
+  if (!token) {
+    return res.status(401).json({ error: "No token" });
+  }
+  try {
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = payload; // { userId, role, iat, exp }
+    next();
+  } catch (e) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+}
 
 module.exports = authToken;

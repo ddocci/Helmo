@@ -1,30 +1,28 @@
 .role-toggle-wrapper {
-  height: auto; /* 내용에 맞게 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 0;
-  padding: 10px 0; /* 필요한 만큼만 여백 */
+  margin-bottom: 2rem;
 }
 
 .signin-title {
-  font-size: 60px;
+  font-size: 2rem;
   font-weight: bold;
   color: #f8f8f8 !important;
-  margin-bottom: 0 50px;  /* 로그인 sign in 여백*/
+  margin-bottom: 0.8rem;
 }
 
 .role-toggle {
   display: flex;
-  gap: 15px;
+  gap: 2rem;
 }
 
 .role-toggle span {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 1.1rem;
+  font-weight: 900; 
   color: #ccc;
   cursor: pointer;
-  padding-bottom: 3px;
+  padding-bottom: 5px;
   border-bottom: 2px solid transparent;
   transition: all 0.2s ease-in-out;
 }

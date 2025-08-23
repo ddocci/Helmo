@@ -1,0 +1,119 @@
+.ImageUploadGrid {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.GridTitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.Grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ImageBox {
+  position: relative;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.2s;
+  cursor: pointer;
+}
+
+.ImageBox:hover {
+  border-color: #3366ff;
+}
+
+.TimeTag {
+  position: absolute;
+  top: -12px;
+  left: 10px;
+  background: #f5f7ff;
+  color: #3366ff;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.UploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.PlusSign {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3366ff;
+}
+
+.UploadText {
+  margin-top: 4px;
+  font-size: 0.85rem;
+}
+
+.PreviewImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.FileCount {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.SaveBtn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.SaveBtn:hover {
+  background: #444;
+}
+
+.MemoInput {
+  width: 100%;
+  min-height: 80px;
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical; /* 크기 조절 가능 */
+  outline: none;
+  transition: border 0.2s;
+}
+
+.MemoInput:focus {
+  border: 1px solid #3366ff;
+  box-shadow: 0 0 4px rgba(51, 102, 255, 0.3);
+}
+

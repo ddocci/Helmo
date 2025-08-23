@@ -205,15 +205,42 @@ const lineData = {
 };
 
   const barData = {
-    labels: ["08:00-10:00", "11:00-13:00", "14:00-16:00", "16:00-18:00"],
+    labels: ["09시", "10시", "11시", "14시", "15시", "16시", "17시", "18시"],
     datasets: [
       {
         label: "미착용 인원수",
-        data: statisticsData.bar || [],
+        data: [3, 2, 4, 2, 3, 1, 2, 1], // 👉 여기는 더미 데이터, 실제 DB와 연결 가능
         backgroundColor: "#6c8cf7",
       },
     ],
   };
+
+
+  const barOptions = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "시간대",
+          },
+        },
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "미착용 인원수",
+          },
+        },
+      },
+    };
+
 
   return (
     <div className="statistics-wrapper" ref={pdfRef}>
@@ -283,7 +310,7 @@ const lineData = {
 
       <div className="chart-section">
         <h3>평균 시간대별 미착용 감지 분포</h3>
-        <Bar data={barData} />
+        <Bar data={barData} options={barOptions} />
       </div>
 
       <div className="pdf-download">

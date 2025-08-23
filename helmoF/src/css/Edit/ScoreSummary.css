@@ -1,0 +1,28 @@
+.ScoreSummary {
+  padding: 20px;
+  border: 2px solid rgb(241, 240, 237);   /* 🟪 보라 박스 */
+  border-radius: 10px;
+  background: #fff;
+}
+
+.ScoreSummary h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.ScoreSummary .Stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.ScoreSummary .Result {
+  margin-top: 8px;
+  padding: 10px;
+  background: #ffe8e8;
+  border-radius: 6px;
+  color: #b20000;
+  font-size: 0.9rem;
+}

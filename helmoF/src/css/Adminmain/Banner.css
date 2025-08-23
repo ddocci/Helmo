@@ -1,0 +1,35 @@
+.BannerBox {
+  display: flex;
+  justify-content: center;    /* 수평 중앙 */
+  align-items: center;        /* 수직 중앙 */
+  gap: 10px;
+
+  max-width: 100%;
+  padding: 12px 18px;
+  margin: 15px 0;
+
+  background: #f9fbff;
+  border: 1px solid #e0ebff;
+  border-radius: 8px;
+
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  text-align: center;         /* 텍스트 중앙 */
+}
+
+.BannerBox .emoji {
+  font-size: 1.2rem;
+}
+
+.BannerBox .text {
+  line-height: 1.4;
+}
+
+.BannerBox strong {
+  color: #1976d2;
+  font-weight: 600;
+}
