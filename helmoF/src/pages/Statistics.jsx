@@ -51,15 +51,16 @@ const Statistics = () => {
     bar: [6, 4, 3, 5],
     pie: [99.2, 97.8, 96.5, 94.1],
   };
-  const yearlyData = {
-    cards: { helmetRate: 96.8, incidents: 512, workers: 1700 },
-    line: [92.5, 94.3, 95.1, 96.4, 96.8],
-    bar: [25, 18, 10, 14],
-    pie: [97.2, 95.8, 94.5, 92.1],
+  const weeklyData = {
+    cards: { helmetRate: 93.5, incidents: 12, workers: 500 },
+    line: [91.1, 93.3, 94.5, 92.2, 93.8, 94.0, 95.2], // 7일 간
+    bar: [3, 2, 2, 1],
+    pie: [95.1, 94.3, 93.5, 92.8],
   };
 
+
   useEffect(() => {
-    setStatisticsData(viewMode === "month" ? monthlyData : yearlyData);
+    setStatisticsData(viewMode === "month" ? monthlyData : weeklyData);
   }, [viewMode, year, month]);
 
   // 페이지 이동
@@ -109,14 +110,81 @@ const Statistics = () => {
   const handlePrevYear = () => setYear(year - 1);
   const handleNextYear = () => setYear(year + 1);
 
+  // 주차 계산 (1월 1일부터 시작한 주차 기준)
+    const getWeekOfMonth = (date) => {
+      const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+      const dayOfWeek = firstDay.getDay() || 7; // 일요일 = 7
+      const adjustedDate = date.getDate() + dayOfWeek - 1;
+      return Math.ceil(adjustedDate / 7);
+    };
+
+    const [currentDate, setCurrentDate] = useState(
+      location.state?.date ? new Date(location.state.date) : new Date()
+    );
+    // const [year, setYear] = useState(currentDate.getFullYear());
+    // const [month, setMonth] = useState(currentDate.getMonth() + 1);
+
+    const getFormattedHeader = () => {
+      if (viewMode === "week") {
+        const week = getWeekOfMonth(currentDate);
+        return `${year}년 ${month}월 ${week}주차`;
+      } else {
+        return `${year}년 ${month}월`;
+      }
+    };
+
+    const handlePrev = () => {
+      if (viewMode === "week") {
+        const prevWeek = new Date(currentDate);
+        prevWeek.setDate(currentDate.getDate() - 7);
+        setCurrentDate(prevWeek);
+        setYear(prevWeek.getFullYear());
+        setMonth(prevWeek.getMonth() + 1);
+      } else {
+        if (month === 1) {
+          setYear(year - 1);
+          setMonth(12);
+        } else {
+          setMonth(month - 1);
+        }
+      }
+    };
+
+    const handleNext = () => {
+      if (viewMode === "week") {
+        const nextWeek = new Date(currentDate);
+        nextWeek.setDate(currentDate.getDate() + 7);
+        setCurrentDate(nextWeek);
+        setYear(nextWeek.getFullYear());
+        setMonth(nextWeek.getMonth() + 1);
+      } else {
+        if (month === 12) {
+          setYear(year + 1);
+          setMonth(1);
+        } else {
+          setMonth(month + 1);
+        }
+      }
+    };
+
+
   // 현재 월의 마지막 일 구하기
 const getLastDayOfMonth = (y, m) => new Date(y, m, 0).getDate(); // m은 1~12
+
+const dayNames = ["월", "화", "수", "목", "금", "토", "일"];
+
+const getLineChartLabels = () => {
+  if (viewMode === "week") return dayNames;
+  const daysInMonth = new Date(year, month, 0).getDate();
+  return Array.from({ length: daysInMonth }, (_, i) => `${i + 1}일`);
+};
+
 
 // 라벨 & 데이터
 const lineLabels =
   viewMode === "month"
     ? Array.from({ length: getLastDayOfMonth(year, month) }, (_, i) => `${i + 1}일`)
-    : Array.from({ length: 12 }, (_, i) => `${i + 1}월`);
+    : ["월", "화", "수", "목", "금", "토", "일"];
 
 const lineData = {
   labels: lineLabels,
@@ -158,21 +226,22 @@ const lineData = {
       <div className="statistics-summary">
         <h3>이미지 기반 안전모 착용 현황 분석</h3>
         <div className="summary-controls">
-          {/* 왼쪽: 월별 / 연도별 버튼 */}
+          {/* 왼쪽: 주별 / 월별 버튼 */}
           <div className="statistics-tabbar">
+            <div
+              className={`tab-button ${viewMode === "week" ? "active" : ""}`}
+              onClick={() => setViewMode("week")}
+            >
+              주별 보기
+            </div>
             <div
               className={`tab-button ${viewMode === "month" ? "active" : ""}`}
               onClick={() => setViewMode("month")}
             >
               월별 보기
             </div>
-            <div
-              className={`tab-button ${viewMode === "year" ? "active" : ""}`}
-              onClick={() => setViewMode("year")}
-            >
-              연도별 보기
-            </div>
           </div>
+
         </div>
 
         {/* 네비게이션 */}
@@ -184,10 +253,11 @@ const lineData = {
           </div>
         ) : (
           <div className="month-navigation">
-            <button className="nav-btn" onClick={handlePrevYear}>◀</button>
-            <h4 className="summary-year">{`< ${year}년 >`}</h4>
-            <button className="nav-btn" onClick={handleNextYear}>▶</button>
+            <button className="nav-btn" onClick={handlePrev}>◀</button>
+            <h4 className="summary-year">{`< ${getFormattedHeader()} >`}</h4>
+            <button className="nav-btn" onClick={handleNext}>▶</button>
           </div>
+
         )}
 
         <div className="summary-cards">
