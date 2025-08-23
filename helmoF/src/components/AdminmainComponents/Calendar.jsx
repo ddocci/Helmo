@@ -1,39 +1,57 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import Calendar from "react-calendar";
 import { useNavigate } from "react-router-dom";
 import "../../css/Adminmain/Calendar.css";
 
-const CalendarComponent = () => {
+const CalendarComponent = ({ onDateClick }) => {
   const navigate = useNavigate();
-  const clickTimeout = useRef(null); // 클릭 타이머 저장용 ref
+  const [hoveredDate, setHoveredDate] = useState(null);
 
-  // 날짜 클릭 시 실행
-  const handleDayClick = (date) => {
-    if (clickTimeout.current) {
-      // 두 번째 클릭(=더블클릭)
-      clearTimeout(clickTimeout.current);
-      clickTimeout.current = null;
+  // ✅ 날짜 셀 커스터마이징
+  const tileContent = ({ date, view }) => {
+    if (view === "month") {
+      const formattedDate = date.toLocaleDateString("sv-SE"); // YYYY-MM-DD
+      return (
+        <div
+          className="DateTile"
+          onMouseEnter={() => setHoveredDate(formattedDate)}
+          onMouseLeave={() => setHoveredDate(null)}
+        >
+          {/* 날짜 숫자 */}
+          <div className="DateNumber">{date.getDate()}</div>
 
-      const formattedDate = date.toISOString().split("T")[0]; // yyyy-mm-dd
-      navigate(`/edit/${formattedDate}`); // ✅ 해당 날짜로 이동
-    } else {
-      // 첫 번째 클릭 시 타이머 시작
-      clickTimeout.current = setTimeout(() => {
-        clickTimeout.current = null;
-      }, 250); // 0.25초 안에 또 클릭되면 더블클릭으로 인식
+          {/* hover 시 메뉴 */}
+          {hoveredDate === formattedDate && (
+            <div className="DateMenu">
+              <button onClick={() => navigate(`/edit/${formattedDate}`)}>
+                업로드
+              </button>
+              <button onClick={() => navigate(`/result/${formattedDate}`)}>
+                결과보기
+              </button>
+            </div>
+          )}
+        </div>
+      );
     }
+    return null;
   };
 
   return (
     <div className="CalendarBox">
       <Calendar
-        onClickDay={handleDayClick}
         locale="ko-KR"
         prev2Label={null}
         next2Label={null}
-        calendarType="gregory" // 주 시작 요일 월요일
-        // ✅ 날짜에서 '일' 제거하고 숫자만 표시
-        formatDay={(locale, date) => date.getDate()}
+        calendarType="gregory"
+        formatDay={() => ""} // ✅ 날짜 숫자는 tileContent에서 직접 렌더링
+        tileContent={tileContent}
+        onClickDay={(value) => {
+          // 📌 날짜 클릭 시 부모(AdminMain)에게 전달
+          if (onDateClick) {
+            onDateClick(value);
+          }
+        }}
       />
     </div>
   );

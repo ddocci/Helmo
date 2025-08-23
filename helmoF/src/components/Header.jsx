@@ -21,6 +21,12 @@ const Header = () => {
     setMenuOpen(false);
   };
 
+  const goToTodayEditPage = () => {
+    const today = new Date();
+    const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    navigate(`/edit/${formattedDate}`);
+  };
+
   return (
     <header className="Header">
       {/* 햄버거 버튼 */}
@@ -43,8 +49,8 @@ const Header = () => {
         </button>
         <ul className="MenuList">
           <li onClick={() => goTo("/adminmain")}>메인 페이지</li>
-          <li onClick={() => goTo("/today")}>금일 관리 페이지</li>
-          <li onClick={() => goTo("/stats")}>통계 페이지</li>
+          <li onClick={goToTodayEditPage}>금일 관리 페이지</li>
+          <li onClick={() => goTo("/statistics")}>통계 페이지</li>
         </ul>
 
         {/* 사용자 정보 영역 */}
