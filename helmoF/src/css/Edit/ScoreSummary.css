@@ -1,6 +1,6 @@
 .ScoreSummary {
   padding: 20px;
-  border: 2px solid purple;   /* 🟪 보라 박스 */
+  border: 2px solid rgb(241, 240, 237);   /* 🟪 보라 박스 */
   border-radius: 10px;
   background: #fff;
 }

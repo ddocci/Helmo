@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  border: 2px solid orange;   /* 🟧 주황 박스 */
+  border: 2px solid rgb(241, 240, 237);   /* 🟧 주황 박스 */
   border-radius: 8px;
   background: #fff;
 }

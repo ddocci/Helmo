@@ -1,45 +1,119 @@
 .ImageUploadGrid {
-  padding: 15px;
-  border: 2px solid gold;   /* 🟨 노랑 박스 */
-  border-radius: 10px;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 12px;
   background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-align: center;
 }
 
-.ImageUploadGrid h3 {
-  margin-bottom: 10px;
-  font-size: 1rem;
-  font-weight: 600;
+.GridTitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-.ImageUploadGrid .Grid {
+.Grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
+  gap: 20px;
 }
 
-.ImageUploadGrid .ImageBox {
-  border: 2px solid green;   /* 🟩 초록 박스 */
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  background: #fafafa;
-}
-
-.ImageUploadGrid .ImageBox img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
+.ImageBox {
+  position: relative;
+  border: 2px dashed #ccc;
   border-radius: 8px;
-}
-
-.ImageUploadGrid .UploadLabel {
-  display: inline-block;
-  width: 100%;
-  height: 120px;
-  border: 2px dashed #aaa;
-  border-radius: 8px;
-  line-height: 120px;
-  color: #777;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.2s;
   cursor: pointer;
-  background: #f9f9f9;
 }
+
+.ImageBox:hover {
+  border-color: #3366ff;
+}
+
+.TimeTag {
+  position: absolute;
+  top: -12px;
+  left: 10px;
+  background: #f5f7ff;
+  color: #3366ff;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.UploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.PlusSign {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3366ff;
+}
+
+.UploadText {
+  margin-top: 4px;
+  font-size: 0.85rem;
+}
+
+.PreviewImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.FileCount {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.SaveBtn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.SaveBtn:hover {
+  background: #444;
+}
+
+.MemoInput {
+  width: 100%;
+  min-height: 80px;
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical; /* 크기 조절 가능 */
+  outline: none;
+  transition: border 0.2s;
+}
+
+.MemoInput:focus {
+  border: 1px solid #3366ff;
+  box-shadow: 0 0 4px rgba(51, 102, 255, 0.3);
+}
+
