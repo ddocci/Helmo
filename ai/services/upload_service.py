@@ -17,13 +17,13 @@ async def upload_image(file: UploadFile = File(...), date: str = Form(...)):
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO site_image (img_path, img_date) VALUES (%s, %s)",
-            (filepath, date)
+            "INSERT INTO site_image (img_path, img_date, memo) VALUES (%s, %s, %s)",
+            (filename, date, memo)   # ✅ memo 함께 저장
         )
         conn.commit()
         cursor.close()
         conn.close()
 
-        return {"message": "업로드 성공", "file": filename, "date": date}
+        return {"message": "업로드 성공", "file": filename, "date": date, "memo": memo}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

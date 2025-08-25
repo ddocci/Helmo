@@ -1,0 +1,14 @@
+/* src/css/statistics/HelmetRateChart.css */
+
+.helmet-rate-chart {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.helmet-rate-chart h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #333;
+}

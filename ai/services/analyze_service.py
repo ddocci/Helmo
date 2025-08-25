@@ -21,8 +21,13 @@ def analyze(date: str):
     total_detected, total_wearing = 0, 0
 
     for row in images:
-        img_path = row["img_path"]
-        slot = row["time_slot"]  # 📌 업로드 시 전달한 시간대 index
+        # ✅ 절대경로 변환
+        img_path = os.path.abspath(row["img_path"])
+        slot = row["time_slot"]
+
+        if not os.path.exists(img_path):
+            print(f"❌ 파일 없음: {img_path}")
+            continue
 
         pred = model.predict(source=img_path, conf=0.5, save=False)
         class_ids = pred[0].boxes.cls.cpu().numpy().astype(int)

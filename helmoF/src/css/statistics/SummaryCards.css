@@ -1,0 +1,73 @@
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative; /* 툴팁 위치용 */
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.card h3 {
+  font-size: 22px;
+  color: #111;
+}
+
+/* 등급 카드도 동일한 스타일 적용 */
+.grade-card {
+  background: #fff;
+  color: #111;
+}
+
+.grade-card h3 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #111;
+}
+
+/* 툴팁 스타일 */
+.tooltip {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #333;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.tooltip table {
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tooltip th, .tooltip td {
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+}
+
+.tooltip th {
+  background: #f1f5f9;
+  font-weight: bold;
+}

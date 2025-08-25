@@ -11,17 +11,17 @@ const Edit = () => {
   const [results, setResults] = useState(null); // AI 분석 결과 상태 저장
 
   return (
-    <div className="EditPage">
-      <div className="HeaderWrapper">
-        <Header />
+    <div>
+          <Header />
+      <div className="EditPage">
+
+        {/* 날짜 + 점수 */}
+        <DateScoreBox />
+
+        {/* 이미지 업로드 + 저장 → 분석 결과 */}
+        <ImageUploadGrid onAnalyzeComplete={setResults} />
+
       </div>
-
-      {/* 날짜 + 점수 */}
-      <DateScoreBox />
-
-      {/* 이미지 업로드 + 저장 → 분석 결과 */}
-      <ImageUploadGrid onAnalyzeComplete={setResults} />
-
     </div>
   );
 };

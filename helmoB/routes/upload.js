@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const db = require("../config/db2"); // DB 연결
+const db = require("../config/db"); // DB 연결
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt"); // 해시 안쓰면 제거해도 됨
-const db = require("../config/db2"); // 네가 쓰는 커넥션 모듈
+const db = require("../config/db"); // 네가 쓰는 커넥션 모듈
 
 exports.login = async (req, res) => {
   const { id, password } = req.body;

@@ -16,25 +16,26 @@ const AdminMain = () => {
   };
 
   return (
-    <div className="AdminMain">
-      {/* 헤더 */}
-      <div className="HeaderWrapper">
-        <Header />
-      </div>
+    <div>
+        {/* 헤더 */}
+          <Header />
+      <div className="AdminMain">
 
-      {/* 상단 배너 */}
-      <Banner />
+        {/* 상단 배너 */}
+        <Banner />
 
-      {/* 캘린더 (날짜 클릭 시 selectedDate 업데이트) */}
-      <CalendarComponent onDateClick={handleDateClick} />
+        {/* 캘린더 (날짜 클릭 시 selectedDate 업데이트) */}
+        <CalendarComponent onDateClick={handleDateClick} />
 
-      {/* 결과 카드 (선택한 날짜 기반으로 변경) */}
-      <div className="ResultContainer">
-        <Result title="일별 기록" date={selectedDate} mode="daily" />
-        <Result title="주간 기록" date={selectedDate} mode="weekly" />
-        <Result title="월간 기록" date={selectedDate} mode="monthly" />
+        {/* 결과 카드 (선택한 날짜 기반으로 변경) */}
+        <div className="ResultContainer">
+          <Result title="일별 기록" date={selectedDate} mode="daily" />
+          <Result title="주간 기록" date={selectedDate} mode="weekly" />
+          <Result title="월간 기록" date={selectedDate} mode="monthly" />
+        </div>
       </div>
     </div>
+
   );
 };
 

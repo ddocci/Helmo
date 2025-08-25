@@ -1,0 +1,17 @@
+/* src/pages/css/Statistics.css */
+
+.statistics-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #f8fafc; /* 은은한 배경 */
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.statistics-page > * {
+  width: 100%;
+  max-width: 1200px; /* 중앙 정렬된 고정 폭 */
+  margin-bottom: 20px;
+}

@@ -22,7 +22,9 @@ app.add_middleware(
 
 # ✅ 정적 파일 서빙
 app.mount("/result", StaticFiles(directory="result"), name="result")
-UPLOAD_DIR = "uploads"
+
+# ✅ 업로드 디렉토리 (절대경로)
+UPLOAD_DIR = os.path.abspath("uploads")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
@@ -46,13 +48,13 @@ async def upload_images(
         timestamp = int(time.time() * 1000)
         safe_name = os.path.basename(file.filename).replace(" ", "_")
         filename = f"{timestamp}-{safe_name}"
-        filepath = os.path.join(UPLOAD_DIR, filename)
+        filepath = os.path.join(UPLOAD_DIR, filename)  # ✅ 절대경로
 
         # 파일 저장
         with open(filepath, "wb") as buffer:
             buffer.write(await file.read())
 
-        # DB 저장
+        # DB 저장 (절대경로 저장)
         cursor.execute(
             "INSERT INTO site_image (img_path, img_date, time_slot) VALUES (%s, %s, %s)",
             (filepath, date, slot)

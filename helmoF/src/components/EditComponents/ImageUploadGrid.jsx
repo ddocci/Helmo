@@ -38,12 +38,12 @@ const ImageUploadGrid = ({ onAnalyzeComplete }) => {
     images.forEach((file, idx) => {
       if (file instanceof File) {
         formData.append("files", file);
-        formData.append("time_slots", idx + 1); // 📌 시간대 index 같이 보냄
+        formData.append("time_slots", idx + 1);
       }
     });
 
     formData.append("memo", memo);
-    formData.append("date", selectedDate); // 📌 선택 날짜
+    formData.append("date", selectedDate);
 
     try {
       // 1) 업로드

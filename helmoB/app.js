@@ -10,6 +10,10 @@ const authRoutes = require("./routes/authRouter");
 const uploadRoutes = require("./routes/upload");
 
 const app = express();
+const statisticsRoutes = require("./routes/statistics");
+
+//통계 api
+app.use("/api/statistics", statisticsRoutes);
 
 // 미들웨어
 app.use(
