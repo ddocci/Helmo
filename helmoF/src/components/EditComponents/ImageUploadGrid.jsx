@@ -16,9 +16,7 @@ const times = [
 const ImageUploadGrid = ({ onAnalyzeComplete }) => {
   const [images, setImages] = useState(Array(times.length).fill(null));
   const [memo, setMemo] = useState("");
-  const [selectedDate, setSelectedDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
+  const [selectedDate, setSelectedDate] = useState("");
 
   // ✅ 업로드 처리
   const handleUpload = useCallback((index, e) => {
@@ -31,8 +29,24 @@ const ImageUploadGrid = ({ onAnalyzeComplete }) => {
     });
   }, []);
 
+  // ✅ 이미지 삭제 처리
+  const handleRemove = useCallback((index) => {
+    if (!window.confirm("이미지를 삭제하시겠습니까?")) return;
+    setImages((prev) => {
+      const newImages = [...prev];
+      newImages[index] = null;
+      return newImages;
+    });
+  }, []);
+
   // ✅ 저장 버튼 → 업로드 + 분석
   const handleSave = useCallback(async () => {
+    // 날짜가 선택되지 않은 경우 저장 불가
+    if (!selectedDate) {
+      alert("날짜를 선택해야 저장할 수 있습니다.");
+      return;
+    }
+
     const formData = new FormData();
 
     images.forEach((file, idx) => {
@@ -75,25 +89,37 @@ const ImageUploadGrid = ({ onAnalyzeComplete }) => {
 
   return (
     <div className="ImageUploadGrid">
-      <h3 className="GridTitle">시간대별 이미지 관리</h3>
+      {/* 제목 + 날짜 선택 */}
+      <div className="GridHeader">
+        <h3 className="GridTitle">시간대별 이미지 관리</h3>
+        <input
+          type="date"
+          className="DatePicker"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+        />
+      </div>
 
-      {/* 📌 날짜 선택 */}
-      <input
-        type="date"
-        value={selectedDate}
-        onChange={(e) => setSelectedDate(e.target.value)}
-      />
-
+      {/* 이미지 업로드 그리드 */}
       <div className="Grid">
         {times.map((time, idx) => (
           <div key={idx} className="ImageBox">
             <div className="TimeTag">{time}</div>
             {images[idx] ? (
-              <img
-                src={URL.createObjectURL(images[idx])}
-                alt={`업로드 ${time}`}
-                className="PreviewImage"
-              />
+              <div className="PreviewWrapper">
+                <img
+                  src={URL.createObjectURL(images[idx])}
+                  alt={`업로드 ${time}`}
+                  className="PreviewImage"
+                />
+                <button
+                  type="button"
+                  className="RemoveBtn"
+                  onClick={() => handleRemove(idx)}
+                >
+                  ×
+                </button>
+              </div>
             ) : (
               <label className="UploadLabel">
                 <span className="PlusSign">+</span>

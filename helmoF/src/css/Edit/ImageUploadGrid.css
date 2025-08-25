@@ -8,13 +8,42 @@
   text-align: center;
 }
 
+/* 제목 + 날짜 선택 */
+.GridHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .GridTitle {
   font-size: 1.1rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin: 0;
   text-align: left;
 }
 
+.DatePicker {
+  padding: 10px 14px;         /* 패딩 키워서 박스 크게 */
+  border: 2px solid #3366ff;  /* 기본 테두리 강조 */
+  border-radius: 8px;         /* 모서리 둥글게 */
+  font-size: 1rem;            /* 글자 크기 키움 */
+  font-weight: bold;          /* 글자 강조 */
+  color: #222;                /* 글자 진하게 */
+  background: #f9fbff;        /* 배경 살짝 파란톤 */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 160px;           /* 넓이 최소 확보 */
+}
+
+.DatePicker:focus {
+  border-color: #1d4ed8;      /* 더 진한 파랑 */
+  box-shadow: 0 0 6px rgba(51, 102, 255, 0.5);
+  outline: none;
+  background: #fff;
+}
+
+/* 이미지 그리드 */
 .Grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -25,15 +54,14 @@
   position: relative;
   border: 2px dashed #ccc;
   border-radius: 8px;
-  height: 140px;
+  padding: 10px;
+  text-align: center;
+  min-height: 180px; /* 높이 고정 */
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  transition: border 0.2s;
-  cursor: pointer;
+  align-items: center;
 }
-
 .ImageBox:hover {
   border-color: #3366ff;
 }
@@ -50,6 +78,7 @@
   border-radius: 12px;
 }
 
+/* 업로드 버튼 */
 .UploadLabel {
   display: flex;
   flex-direction: column;
@@ -69,19 +98,66 @@
   font-size: 0.85rem;
 }
 
-.PreviewImage {
+/* 이미지 미리보기 */
+.PreviewWrapper {
+  position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
-  object-fit: cover;
 }
 
+.PreviewImage {
+  width: 100%;
+  height: 160px;
+  object-fit: cover; /* 박스 크기에 맞게 */
+  border-radius: 6px;
+}
+
+/* 삭제 버튼 */
+.RemoveBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.RemoveBtn:hover {
+  background: red;
+}
+
+/* 파일 개수 */
 .FileCount {
   margin-top: 15px;
   font-size: 0.9rem;
   color: #555;
 }
 
+/* 메모 입력 */
+.MemoInput {
+  width: 100%;
+  min-height: 80px;
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+  outline: none;
+  transition: border 0.2s;
+}
+.MemoInput:focus {
+  border: 1px solid #3366ff;
+  box-shadow: 0 0 4px rgba(51, 102, 255, 0.3);
+}
+
+/* 저장 버튼 */
 .SaveBtn {
   margin-top: 15px;
   width: 100%;
@@ -94,26 +170,6 @@
   font-size: 1rem;
   transition: background 0.2s;
 }
-
 .SaveBtn:hover {
   background: #444;
 }
-
-.MemoInput {
-  width: 100%;
-  min-height: 80px;
-  margin-top: 15px;
-  padding: 10px;
-  font-size: 0.95rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  resize: vertical; /* 크기 조절 가능 */
-  outline: none;
-  transition: border 0.2s;
-}
-
-.MemoInput:focus {
-  border: 1px solid #3366ff;
-  box-shadow: 0 0 4px rgba(51, 102, 255, 0.3);
-}
-
