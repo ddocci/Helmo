@@ -1,0 +1,68 @@
+.daily-result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.daily-result-table thead {
+  background-color: #f5f6f8;
+}
+
+.daily-result-table th {
+  padding: 12px;
+  border-bottom: 2px solid #ddd;
+  color: #333;
+  font-weight: bold;
+}
+
+.daily-result-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  color: #555;
+}
+
+.daily-result-table tr:hover {
+  background-color: #fafafa;
+}
+
+.result-image-preview {
+  width: 100px;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}
+
+.delete-btn {
+  padding: 6px 12px;
+  background-color: #ff4d4f;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.delete-btn:hover {
+  background-color: #e63946;
+}
+
+.loading-text {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+}
+
+.no-result-text {
+  text-align: center;
+  font-size: 16px;
+  color: #aaa;
+  margin-top: 20px;
+}

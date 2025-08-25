@@ -205,7 +205,7 @@ const lineData = {
 };
 
   const barData = {
-    labels: ["09시", "10시", "11시", "14시", "15시", "16시", "17시", "18시"],
+    labels: ["07:00 ~ 08:00", "08:00 ~ 09:00", "09:00 ~ 10:00", "10:00 ~ 11:30", "13:00 ~ 14:00", "14:00 ~ 15:00", "15:00 ~ 16:00", "16:00 ~ 17:00"],
     datasets: [
       {
         label: "미착용 인원수",
@@ -243,8 +243,9 @@ const lineData = {
 
 
   return (
-    <div className="statistics-wrapper" ref={pdfRef}>
+    <div>
       <Header/>
+      <div className="statistics-wrapper" ref={pdfRef}>
       {/* <div className="statistics-header">
         <h2>전체 통계</h2>
         <img src="/logo.png" alt="Helmo Logo" className="statistics-logo" />
@@ -317,6 +318,7 @@ const lineData = {
         <button className="pdf-btn" onClick={handleDownloadPDF}>
           {`${year}년 ${viewMode === "month" ? month + "월 " : ""}통계 PDF로 내보내기`}
         </button>
+      </div>
       </div>
     </div>
   );
