@@ -1,4 +1,3 @@
-// src/components/statistics/HelmetRateChart.jsx
 import React from "react";
 import { Line } from "react-chartjs-2";
 import {
@@ -9,37 +8,21 @@ import {
   PointElement,
   Tooltip,
   Legend,
+  Filler,   // ✅ fill 옵션용
 } from "chart.js";
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend, Filler);
 
 const HelmetRateChart = ({ labels, rates }) => {
-  // 요일 변환 매핑
-  const weekMap = ["일", "월", "화", "수", "목", "금", "토"];
-
-  // 📌 labels가 날짜일 경우 → 요일로 변환
-  const parsedLabels = labels.map((label, idx) => {
-    try {
-      const d = new Date(label);
-      if (!isNaN(d.getTime())) {
-        return weekMap[d.getDay()];
-      }
-    } catch (e) {}
-    return label; // 날짜 변환 실패하면 원래 값
-  });
-
   const data = {
-    labels: parsedLabels,
+    labels,
     datasets: [
       {
         label: "착용률(%)",
         data: rates,
         borderColor: "blue",
-        backgroundColor: "blue",
-        tension: 0.3,
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        fill: false,
+        backgroundColor: "rgba(0, 0, 255, 0.2)",
+        fill: true, // ✅ Filler 플러그인 활성화됨
       },
     ],
   };
@@ -50,11 +33,7 @@ const HelmetRateChart = ({ labels, rates }) => {
       legend: { position: "top" },
     },
     scales: {
-      y: {
-        beginAtZero: true,
-        max: 100,
-        ticks: { stepSize: 10 },
-      },
+      y: { beginAtZero: true, max: 100 },
     },
   };
 
